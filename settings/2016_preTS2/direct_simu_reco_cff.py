@@ -59,20 +59,22 @@ config_2016_preTS2 = cms.PSet(
   ),
 
   scoringPlanes = cms.VPSet(
-      # z in cm
-      cms.PSet( rpId = cms.uint32(0x76100000), dirName = cms.string("XRPH_C6L5_B2"), z = cms.double(-20382.6) ),  # RP 002, strip
-      cms.PSet( rpId = cms.uint32(0x76180000), dirName = cms.string("XRPH_D6L5_B2"), z = cms.double(-21255.1) ),  # RP 003, strip
-      cms.PSet( rpId = cms.uint32(0x77100000), dirName = cms.string("XRPH_C6R5_B1"), z = cms.double(+20382.6) ),  # RP 102, strip
-      cms.PSet( rpId = cms.uint32(0x77180000), dirName = cms.string("XRPH_D6R5_B1"), z = cms.double(+21255.1) ),  # RP 103, strip
+    # z in cm
+    cms.PSet( rpId = cms.uint32(0x76100000), dirName = cms.string("XRPH_C6L5_B2"), z = cms.double(-20382.6) ),  # RP 002, strip
+    cms.PSet( rpId = cms.uint32(0x76180000), dirName = cms.string("XRPH_D6L5_B2"), z = cms.double(-21255.1) ),  # RP 003, strip
+    cms.PSet( rpId = cms.uint32(0x77100000), dirName = cms.string("XRPH_C6R5_B1"), z = cms.double(+20382.6) ),  # RP 102, strip
+    cms.PSet( rpId = cms.uint32(0x77180000), dirName = cms.string("XRPH_D6R5_B1"), z = cms.double(+21255.1) ),  # RP 103, strip
   )
 )
 
 ctppsOpticalFunctionsESSource.configuration.append(config_2016_preTS2)
 
-# geometry
+# geometry/alignment
 from Geometry.VeryForwardGeometry.geometryRPFromDD_2017_cfi import * # NB: 2017 is OK here
-del(XMLIdealGeometryESSource_CTPPS.geomXMLFiles[-1])
-XMLIdealGeometryESSource_CTPPS.geomXMLFiles.append("$CWD/RP_Dist_Beam_Cent.xml")
+
+from CalibPPS.ESProducers.ctppsRPAlignmentCorrectionsDataESSourceXML_cfi import *
+ctppsRPAlignmentCorrectionsDataESSourceXML.MisalignedFiles = ["$CWD/alignment.xml"]
+ctppsRPAlignmentCorrectionsDataESSourceXML.RealFiles = ["$CWD/alignment.xml"]
 
 # particle-data table
 from SimGeneral.HepPDTESSource.pythiapdt_cfi import *
@@ -91,6 +93,7 @@ source = cms.Source("EmptySource",
 
 # particle generator
 from Validation.CTPPS.randomXiThetaGunProducer_cfi import *
+generator.xi_max = 0.25
 
 # beam smearing
 from IOMC.EventVertexGenerators.beamDivergenceVtxGenerator_cfi import *

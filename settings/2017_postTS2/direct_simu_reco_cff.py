@@ -73,8 +73,10 @@ ctppsOpticalFunctionsESSource.configuration.append(config_2017)
 
 # geometry
 from Geometry.VeryForwardGeometry.geometryRPFromDD_2017_cfi import *
-del(XMLIdealGeometryESSource_CTPPS.geomXMLFiles[-1])
-XMLIdealGeometryESSource_CTPPS.geomXMLFiles.append("$CWD/RP_Dist_Beam_Cent.xml")
+
+from CalibPPS.ESProducers.ctppsRPAlignmentCorrectionsDataESSourceXML_cfi import *
+ctppsRPAlignmentCorrectionsDataESSourceXML.MisalignedFiles = ["$CWD/alignment.xml"]
+ctppsRPAlignmentCorrectionsDataESSourceXML.RealFiles = ["$CWD/alignment.xml"]
 
 # particle-data table
 from SimGeneral.HepPDTESSource.pythiapdt_cfi import *
@@ -93,6 +95,7 @@ source = cms.Source("EmptySource",
 
 # particle generator
 from Validation.CTPPS.randomXiThetaGunProducer_cfi import *
+generator.xi_max = 0.25
 
 # beam smearing
 from IOMC.EventVertexGenerators.beamDivergenceVtxGenerator_cfi import *

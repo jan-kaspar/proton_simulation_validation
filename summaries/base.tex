@@ -1,0 +1,134 @@
+\def\today{%
+	\number\day
+	\space
+	\ifcase\month\or
+	January\or February\or March\or April\or May\or June\or
+	July\or August\or September\or October\or November\or December
+	\fi
+	\space
+	\number\year
+}
+
+\newpage %-------------------------------------------------------------------------------------------
+
+\def\author{J.~Kašpar}
+\def\caption{Proton simulation validation, \PeriodLabel}
+\def\date{\today}
+
+\iffalse
+* single-rp reco
+
+* multi-rp reco
+ - resolution
+ - impact of misalignment
+ - impact of optics systematics
+\fi
+
+\newpage %-------------------------------------------------------------------------------------------
+\title{Introduction}
+
+\> unless specified differently, the tests are performed with the following settings
+\>> proton gun
+\>>> $\xi$ distributed uniformly between $0$ and $0.25$
+\>>> $\th^*_{x, y}$: Gaussian distribution with RMS of $50\un{\mu rad}$
+
+\>> beam smearing
+\>>> $x^*$, $y^*$: Gaussian distribution with RMS of $10\un{\mu m}$
+\>>> $z^*$: Gaussian distribution with RMS of $50\un{mm}$
+\>>> beam divergence: Gaussian distribution with RMS of $30\un{\mu rad}$
+
+\>> RP position: tuned horizontally and vertically to reproduce hit distributions in a reference LHC fill (see later)
+
+\>> aperture model: as presented in POG meeting on 21 May 2019
+
+\>> optics: as currently in CondDB
+
+\>> proton reconstruction: from CMSSW 10\_6\_0
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\title{Proton gun validation}
+
+\SmallerFonts
+
+\> distributions of simulated proton quantities
+
+\centerline{\fig[16cm]{../../plots/\Period/general/proton_gun_validation.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\title{Beam smearing validation}
+
+\SmallerFonts
+
+\> $\De$ = (after smearing) - (before smearing)
+
+\> top row: vertex smearing, bottom row: angular smearing (beam divergence)
+
+\centerline{\fig[13cm]{../../plots/\Period/general/beam_smearing_validation.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Sensor resolution}
+
+\SmallerFonts
+
+\> simu = proton arrival point as given by optics
+
+\> reco = sensor simulation + standard local-track reconstruction
+
+\centerline{\fig[16cm]{../../plots/\Period/general/simu_reco_diff_gun.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Comparison to LHC data}
+
+\SmallerFonts
+
+\> focus to reproduce edges
+\>> low x: sensor edge
+\>> high x: LHC aperture
+
+\centerline{\fig[16cm]{../../plots/\Period/general/x_dist_reco_gun_vs_ref.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Comparison to LHC data}
+
+\SmallerFonts
+
+\> focus to reproduce edges -- only visible for pixels (vertically narrow)
+
+\centerline{\fig[16cm]{../../plots/\Period/general/y_dist_reco_gun_vs_ref.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Comparison to LHC data}
+
+\centerline{\fig[16cm]{../../plots/\Period/general/xy_dist_reco_gun_vs_ref.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Acceptance}
+
+\centerline{\fig[16cm]{../../plots/\Period/general/acceptance.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{}{}
+
+%\centerline{\fig[,10.5cm]{../../plots/\Period/quality/chi_sq_histogram_cmp_fill.pdf}}
+
+
+
+
+\vfil
+\eject
+\bye

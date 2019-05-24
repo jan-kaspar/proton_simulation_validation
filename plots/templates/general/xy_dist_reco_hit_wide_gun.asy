@@ -14,10 +14,10 @@ for (int rpi : rps.keys)
 	scale(Linear, Linear, Log);
 
 	RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x");
-	hist.vExec("Rebin2D", 3, 3);
+	hist.vExec("Rebin2D", 2, 2);
 
 	draw(hist);
-	limits((0, -25), (50, 25), Crop);
+	limits((0, -20), (40, 20), Crop);
 	AttachLegend(rp_labels[rpi]);
 }
 

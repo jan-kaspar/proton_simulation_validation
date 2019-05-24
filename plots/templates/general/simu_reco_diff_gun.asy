@@ -11,35 +11,45 @@ string f_sensor = topDir + dir + "/test_smearing_effects_sensor.root";
 
 xTicksDef = LeftTicks(20., 10.);
 
-//----------------------------------------------------------------------------------------------------
-
-for (int rpi : rps.keys)
-{
-	NewPad("$x_{\rm reco} - x_{\rm simu}\ung{\mu m}$");
-	scale(Linear, Linear, Log);
-
-	draw(scale(1e3, 1e3), RootGetObject(f_beam, "RP " + rps[rpi] + "/h_de_x"), "vl", blue);
-	draw(scale(1e3, 1e3), RootGetObject(f_sensor, "RP " + rps[rpi] + "/h_de_x"), "vl", red);
-
-	xlimits(-50, +50, Crop);
-
-	AttachLegend(rp_labels[rpi]);
-}
+string projections[];
+projections.push("x");
+projections.push("y");
 
 //----------------------------------------------------------------------------------------------------
-NewRow();
+
+NewPad(false);
+AddToLegend("period: " + replace(period, "_", "\_"));
+AddToLegend("version: " + version);
+
+AddToLegend("simulation", black);
+AddToLegend("LHC data (fill " + ref_data_fill + ")", red);
+
+AttachLegend();
 
 for (int rpi : rps.keys)
+	NewPadLabel(rp_labels[rpi]);
+
+//----------------------------------------------------------------------------------------------------
+
+for (int pi : projections.keys)
 {
-	NewPad("$y_{\rm reco} - y_{\rm simu}\ung{\mu m}$");
-	scale(Linear, Linear, Log);
+	NewRow();
 
-	draw(scale(1e3, 1e3), RootGetObject(f_beam, "RP " + rps[rpi] + "/h_de_y"), "vl", blue);
-	draw(scale(1e3, 1e3), RootGetObject(f_sensor, "RP " + rps[rpi] + "/h_de_y"), "vl", red);
+	NewPadLabel(projections[pi]);
 
-	xlimits(-50, +50, Crop);
+	for (int rpi : rps.keys)
+	{
+		NewPad("$" + projections[pi] + "_{\rm reco} - " + projections[pi] + "_{\rm simu}\ung{\mu m}$");
 
-	AttachLegend(rp_labels[rpi]);
+		//draw(scale(1e3, 1e3), RootGetObject(f_beam, "RP " + rps[rpi] + "/h_de_x"), "vl", blue);
+
+		RootObject hist_sensor = RootGetObject(f_sensor, "RP " + rps[rpi] + "/h_de_x");
+		draw(scale(1e3, 1), hist_sensor, "vl", red, format("RMS = %.1f", hist_sensor.rExec("GetRMS") * 1e3));
+
+		xlimits(-50, +50, Crop);
+
+		AttachLegend();
+	}
 }
 
 //----------------------------------------------------------------------------------------------------

@@ -19,7 +19,7 @@ process.MessageLogger = cms.Service("MessageLogger",
 
 # number of events
 process.maxEvents = cms.untracked.PSet(
-  input = cms.untracked.int32(10000)
+  input = cms.untracked.int32(100000)
 )
 
 # acceptance plotter
@@ -35,6 +35,12 @@ process.ctppsAcceptancePlotter = cms.EDAnalyzer("CTPPSAcceptancePlotter",
   outputFile = cms.string("test_acceptance.root")
 )
 
+# distribution plotter
+process.ctppsTrackDistributionPlotter = cms.EDAnalyzer("CTPPSTrackDistributionPlotter",
+  tagTracks = cms.InputTag("ctppsLocalTrackLiteProducer"),
+  outputFile = cms.string("test_acceptance_xy.root")
+)
+
 # processing path
 process.p = cms.Path(
   process.generator
@@ -44,4 +50,5 @@ process.p = cms.Path(
   * process.reco_local
 
   * process.ctppsAcceptancePlotter
+  * process.ctppsTrackDistributionPlotter
 )

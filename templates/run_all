@@ -5,5 +5,5 @@ do
 	cmsRun "${tag}_cfg.py" &> "${tag}.log" &
 done
 
-./resolution_run_multiple "100" "1E3"
-./misalignment_run_multiple "100" "1E3"
+./resolution_run_multiple "100" "1E4"
+./misalignment_run_multiple "100" "1E4"

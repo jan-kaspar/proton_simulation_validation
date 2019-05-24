@@ -22,12 +22,11 @@ function Run()
 		mkdir -p "$dir"
 		cp templates/* "$dir"
 		cp settings/$period/* "$dir"
-		cp settings/*.py "$dir"
 
 		cd "$dir" || exit
 
 		cwd=`pwd -P`
-		cwd=${cwd#*src/}
+		cwd=${cwd#*proton_simulation_validation/}
 
 		sed -i "s|\$CWD|$cwd|" direct_simu_reco_cff.py
 

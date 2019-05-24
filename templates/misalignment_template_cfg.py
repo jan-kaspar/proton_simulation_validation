@@ -23,7 +23,8 @@ process.maxEvents = cms.untracked.PSet(
 )
 
 # misalignment
-process.load("CalibPPS.ESProducers.ctppsRPAlignmentCorrectionsDataESSourceXML_cfi")
+# TODO: add alignments on top
+#process.load("CalibPPS.ESProducers.ctppsRPAlignmentCorrectionsDataESSourceXML_cfi")
 
 # reconstruction validation
 process.ctppsProtonReconstructionSimulationValidator = cms.EDAnalyzer("CTPPSProtonReconstructionSimulationValidator",

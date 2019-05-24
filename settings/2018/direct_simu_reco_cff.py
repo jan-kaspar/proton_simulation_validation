@@ -55,17 +55,17 @@ config_2018 = cms.PSet(
   validityRange = cms.EventRange("0:min - 999999:max"),
 
   opticalFunctions = cms.VPSet(
-      cms.PSet( xangle = cms.double(120), fileName = cms.FileInPath("CalibPPS/ESProducers/data/optical_functions/2018/version3/120urad.root") ),
-      cms.PSet( xangle = cms.double(130), fileName = cms.FileInPath("CalibPPS/ESProducers/data/optical_functions/2018/version3/130urad.root") ),
-      cms.PSet( xangle = cms.double(140), fileName = cms.FileInPath("CalibPPS/ESProducers/data/optical_functions/2018/version3/140urad.root") )
+    cms.PSet( xangle = cms.double(120), fileName = cms.FileInPath("CalibPPS/ESProducers/data/optical_functions/2018/version3/120urad.root") ),
+    cms.PSet( xangle = cms.double(130), fileName = cms.FileInPath("CalibPPS/ESProducers/data/optical_functions/2018/version3/130urad.root") ),
+    cms.PSet( xangle = cms.double(140), fileName = cms.FileInPath("CalibPPS/ESProducers/data/optical_functions/2018/version3/140urad.root") )
   ),
 
   scoringPlanes = cms.VPSet(
-      # z in cm
-      cms.PSet( rpId = cms.uint32(2014838784), dirName = cms.string("XRPH_D6L5_B2"), z = cms.double(-21255.1) ),  # RP 003, pixel
-      cms.PSet( rpId = cms.uint32(2023227392), dirName = cms.string("XRPH_B6L5_B2"), z = cms.double(-21955.0) ),  # RP 023, pixel
-      cms.PSet( rpId = cms.uint32(2031616000), dirName = cms.string("XRPH_D6R5_B1"), z = cms.double(+21255.1) ),  # RP 103, pixel
-      cms.PSet( rpId = cms.uint32(2040004608), dirName = cms.string("XRPH_B6R5_B1"), z = cms.double(+21955.0) ),  # RP 123, pixel
+    # z in cm
+    cms.PSet( rpId = cms.uint32(2014838784), dirName = cms.string("XRPH_D6L5_B2"), z = cms.double(-21255.1) ),  # RP 003, pixel
+    cms.PSet( rpId = cms.uint32(2023227392), dirName = cms.string("XRPH_B6L5_B2"), z = cms.double(-21955.0) ),  # RP 023, pixel
+    cms.PSet( rpId = cms.uint32(2031616000), dirName = cms.string("XRPH_D6R5_B1"), z = cms.double(+21255.1) ),  # RP 103, pixel
+    cms.PSet( rpId = cms.uint32(2040004608), dirName = cms.string("XRPH_B6R5_B1"), z = cms.double(+21955.0) ),  # RP 123, pixel
   )
 )
 
@@ -73,17 +73,19 @@ ctppsOpticalFunctionsESSource.configuration.append(config_2018)
 
 # geometry
 from Geometry.VeryForwardGeometry.geometryRPFromDD_2018_cfi import *
-del(XMLIdealGeometryESSource_CTPPS.geomXMLFiles[-1])
-XMLIdealGeometryESSource_CTPPS.geomXMLFiles.append("$CWD/RP_Dist_Beam_Cent.xml")
+
+from CalibPPS.ESProducers.ctppsRPAlignmentCorrectionsDataESSourceXML_cfi import *
+ctppsRPAlignmentCorrectionsDataESSourceXML.MisalignedFiles = ["$CWD/alignment.xml"]
+ctppsRPAlignmentCorrectionsDataESSourceXML.RealFiles = ["$CWD/alignment.xml"]
 
 # particle-data table
 from SimGeneral.HepPDTESSource.pythiapdt_cfi import *
 
 # random seeds
 RandomNumberGeneratorService = cms.Service("RandomNumberGeneratorService",
-    sourceSeed = cms.PSet(initialSeed =cms.untracked.uint32(98765)),
-    generator = cms.PSet(initialSeed = cms.untracked.uint32(98766)),
-    beamDivergenceVtxGenerator = cms.PSet(initialSeed =cms.untracked.uint32(3849))
+  sourceSeed = cms.PSet(initialSeed =cms.untracked.uint32(98765)),
+  generator = cms.PSet(initialSeed = cms.untracked.uint32(98766)),
+  beamDivergenceVtxGenerator = cms.PSet(initialSeed =cms.untracked.uint32(3849))
 )
 
 # default source
@@ -93,6 +95,7 @@ source = cms.Source("EmptySource",
 
 # particle generator
 from Validation.CTPPS.randomXiThetaGunProducer_cfi import *
+generator.xi_max = 0.25
 
 # beam smearing
 from IOMC.EventVertexGenerators.beamDivergenceVtxGenerator_cfi import *
