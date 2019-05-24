@@ -1,0 +1,20 @@
+#!/bin/bash
+
+for period in "2016_preTS2" "2017_preTS2" "2017_postTS2" "2018"
+do
+	rm -rf "$period"
+
+	mkdir "$period"
+	ln -s "../settings_$period.asy" "$period/settings.asy"
+
+	for dir in "general" "reco_multi_rp" "reco_single_rp"
+	do
+		mkdir "$period/$dir"
+
+		for file in templates/$dir/*.asy
+		do
+			file=${file##*/}
+			ln -s "../../templates/$dir/$file" "$period/$dir/$file"
+		done
+	done
+done

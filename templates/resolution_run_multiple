@@ -1,0 +1,50 @@
+#!/bin/bash
+
+function RunOne()
+{
+	local thSize="$1"
+	local level="$2"
+
+	local tag="th_${thSize}_level_${level}"
+
+	local cfgFile="resolution_${tag}_cfg.py"
+	local logFile="resolution_${tag}.log"
+
+	cp "resolution_template_cfg.py" "$dir/$cfgFile"
+
+	(
+		echo "process.maxEvents.input = $events"
+		echo "Set${thSize}Theta(process)"
+		echo "SetLevel${level}(process)"
+		echo "process.ctppsProtonReconstructionSimulationValidator.outputFile = \"resolution_${tag}_validation.root\""
+	) >> "$dir/$cfgFile"
+
+	cd "$dir"
+
+	cmsRun "$cfgFile" &> "$logFile" &
+
+	cd - &> /dev/null
+}
+
+
+#----------------------------------------------------------------------------------------------------
+
+function Run()
+{
+	events="$1"
+	dir="."
+
+	#RunOne "Low" "1"
+	#RunOne "Low" "2"
+	#RunOne "Low" "3"
+	#RunOne "Low" "4"
+
+	RunOne "Large" "1"
+	RunOne "Large" "2"
+	RunOne "Large" "3"
+	RunOne "Large" "4"
+}
+
+#----------------------------------------------------------------------------------------------------
+
+Run "$1" "$2"

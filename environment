@@ -1,0 +1,23 @@
+#!/bin/bash
+
+cwd=`pwd`
+
+cd "/afs/cern.ch/work/j/jkaspar/software/ctpps/development/proton_reco_step4/CMSSW_10_6_0"
+source environment
+
+compName=$(uname -n)
+export compName="${compName%%.*}"
+
+function CalculatePrompt()
+{
+	cwd=`pwd`
+	cwd=${cwd/\/afs\/cern.ch\/work\/j\/jkaspar/...}
+	cwd=${cwd/\/analyses\/ctpps/}
+}
+
+PROMPT_COMMAND="CalculatePrompt"
+export PS1="\[\033[00;34m\]${compName} \[\033[00;33m\]${CMSSW_VERSION}\[\033[00;32m\] \$cwd> \[\033[00m\]"
+
+cd "$cwd"
+
+echo "CMSSW_BASE=$CMSSW_BASE"

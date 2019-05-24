@@ -1,0 +1,58 @@
+#!/bin/bash
+
+function RunOne()
+{
+	local tag="$1"
+	local de_x_N="$2"
+	local de_x_F="$3"
+	local de_y_N="$4"
+	local de_y_F="$5"
+
+	local cfgFile="misalignment_${tag}_cfg.py"
+	local logFile="misalignment_${tag}.log"
+	local aligFile="misalignment_${tag}.xml"
+
+	cat "misalignment_template.xml" | sed "\
+			s|\$de_x_N|$de_x_N|; \
+			s|\$de_x_F|$de_x_F|; \
+			s|\$de_y_N|$de_y_N|; \
+			s|\$de_y_F|$de_y_F|; \
+		" > "$dir/$aligFile"
+
+	cp "misalignment_template_cfg.py" "$dir/$cfgFile"
+
+	(
+		echo "process.maxEvents.input = $events"
+
+		cwd=`pwd -P`
+		cwd=${cwd#*src/}
+
+		echo "process.ctppsRPAlignmentCorrectionsDataESSourceXML.MisalignedFiles += cms.vstring(\"$cwd/$aligFile\")"
+		echo "process.ctppsProtonReconstructionSimulationValidator.outputFile = \"misalignment_${tag}_validation.root\""
+	) >> "$dir/$cfgFile"
+
+	cd "$dir"
+
+	cmsRun "$cfgFile" &> "$logFile" &
+
+	cd - &> /dev/null
+}
+
+
+#----------------------------------------------------------------------------------------------------
+
+function Run()
+{
+	events="$1"
+	dir="."
+
+	RunOne "none" "0" "0" "0" "0"
+	RunOne "x_sym" "+150" "+150" "0" "0"
+	RunOne "x_asym" "-10" "+10" "0" "0"
+	RunOne "y_sym" "0" "0" "+100" "+100"
+	RunOne "y_asym" "0" "0" "-10" "+10"
+}
+
+#----------------------------------------------------------------------------------------------------
+
+Run "$1" "$2"

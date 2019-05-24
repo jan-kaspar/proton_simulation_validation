@@ -1,0 +1,45 @@
+#!/bin/bash
+
+periods=(
+	"2016_preTS2"
+	"2017_preTS2"
+	"2017_postTS2"
+	"2018"
+)
+
+#----------------------------------------------------------------------------------------------------
+
+function Run()
+{
+	version="$1"
+
+	for period in ${periods[*]}
+	do
+		echo "$version/$period"
+
+		dir="results/$version/$period/"
+
+		mkdir -p "$dir"
+		cp templates/* "$dir"
+		cp settings/$period/* "$dir"
+		cp settings/*.py "$dir"
+
+		cd "$dir" || exit
+
+		cwd=`pwd -P`
+		cwd=${cwd#*src/}
+
+		sed -i "s|\$CWD|$cwd|" direct_simu_reco_cff.py
+
+		rm -f *.root
+		rm -f *.log
+
+		./run_all
+
+		cd - > /dev/null
+	done
+}
+
+#----------------------------------------------------------------------------------------------------
+
+Run "version1"
