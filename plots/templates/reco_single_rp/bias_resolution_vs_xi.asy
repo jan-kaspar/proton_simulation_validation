@@ -31,10 +31,10 @@ string q_labels[];
 string q_units[];
 real q_scales[], q_mean_lims[], q_RMS_lims[];
 quantities.push("xi"); q_labels.push("\xi"); q_units.push(""); q_scales.push(1.); q_mean_lims.push(0.01); q_RMS_lims.push(0.04);
-quantities.push("th_x"); q_labels.push("\th^*_x"); q_units.push("\ung{\mu rad}"); q_scales.push(1e6); q_mean_lims.push(15.); q_RMS_lims.push(30.);
-quantities.push("th_y"); q_labels.push("\th^*_y"); q_units.push("\ung{\mu rad}"); q_scales.push(1e6); q_mean_lims.push(15.); q_RMS_lims.push(30.);
-quantities.push("vtx_y"); q_labels.push("y^*"); q_units.push("\ung{\mu m}"); q_scales.push(1e3); q_mean_lims.push(100.); q_RMS_lims.push(200.);
-quantities.push("t"); q_labels.push("|t|"); q_units.push("\ung{GeV^2}"); q_scales.push(1.); q_mean_lims.push(0.5); q_RMS_lims.push(1.);
+//quantities.push("th_x"); q_labels.push("\th^*_x"); q_units.push("\ung{\mu rad}"); q_scales.push(1e6); q_mean_lims.push(15.); q_RMS_lims.push(30.);
+//quantities.push("th_y"); q_labels.push("\th^*_y"); q_units.push("\ung{\mu rad}"); q_scales.push(1e6); q_mean_lims.push(15.); q_RMS_lims.push(30.);
+//quantities.push("vtx_y"); q_labels.push("y^*"); q_units.push("\ung{\mu m}"); q_scales.push(1e3); q_mean_lims.push(100.); q_RMS_lims.push(200.);
+//quantities.push("t"); q_labels.push("|t|"); q_units.push("\ung{GeV^2}"); q_scales.push(1.); q_mean_lims.push(0.5); q_RMS_lims.push(1.);
 
 xTicksDef = LeftTicks(0.05, 0.01);
 

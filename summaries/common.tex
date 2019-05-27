@@ -1,0 +1,246 @@
+\def\today{%
+	\number\day
+	\space
+	\ifcase\month\or
+	January\or February\or March\or April\or May\or June\or
+	July\or August\or September\or October\or November\or December
+	\fi
+	\space
+	\number\year
+}
+
+\newpage %-------------------------------------------------------------------------------------------
+
+\def\author{J.~Kašpar}
+\def\caption{Proton simulation validation, \PeriodLabel}
+\def\date{\today}
+
+\iffalse
+* single-rp reco
+
+* multi-rp reco
+ - resolution
+ - impact of misalignment
+ - impact of optics systematics
+\fi
+
+\newpage %-------------------------------------------------------------------------------------------
+\title{Introduction}
+
+\> unless specified differently, the tests are performed with the following settings
+\>> proton gun
+\>>> $\xi$ distributed uniformly between $0$ and $0.25$
+\>>> $\th^*_{x, y}$: Gaussian distribution with RMS of $60\un{\mu rad}$
+
+\>> beam smearing
+\>>> $x^*$, $y^*$: Gaussian distribution with RMS of $10\un{\mu m}$
+\>>> $z^*$: Gaussian distribution with RMS of $50\un{mm}$
+\>>> beam divergence: Gaussian distribution with RMS of $30\un{\mu rad}$
+
+\>> RP position: tuned horizontally and vertically to reproduce hit distributions in a reference LHC fill (see later)
+
+\>> aperture model: as presented in POG meeting on 21 May 2019
+
+\>> optics: as currently in CondDB
+
+\>> proton reconstruction: from CMSSW 10\_6\_0
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\title{Proton gun validation}
+
+\SmallerFonts
+
+\> distributions of simulated proton quantities (extracted from HepMC output)
+
+\centerline{\fig[16cm]{../plots/\Period/general/proton_gun_validation.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\title{Beam smearing validation}
+
+\SmallerFonts
+
+\> $\De$ = (HepMC after smearing) - (HepMC before smearing)
+
+\> top row: vertex smearing, bottom row: angular smearing (beam divergence)
+
+\centerline{\fig[13cm]{../plots/\Period/general/beam_smearing_validation.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Sensor resolution}
+
+\SmallerFonts
+
+\> simu = proton arrival point as given by optics
+
+\> reco = sensor simulation + standard local-track reconstruction
+
+\centerline{\fig[16cm]{../plots/\Period/general/simu_reco_diff_gun.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Long extrapolation}
+
+\SmallerFonts
+
+\> $\De$ calculated between:
+\>> normal simulation: proton transported to the centre of each RP, linear extrapolation only between planes
+\>> test simulation: proton transported to the centre of near RP, linear extrapolation up to the far one
+
+\centerline{\fig[15cm]{../plots/\Period/general/long_extrapolation_gun.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Comparison to LHC data}
+
+\SmallerFonts
+
+\> $x$ distributions (integrated over all values of $y$)
+
+\> focus to reproduce edges
+\>> low x: sensor edge
+\>> high x: LHC aperture
+
+\centerline{\fig[15cm]{../plots/\Period/general/x_dist_reco_gun_vs_ref.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Comparison to LHC data}
+
+\SmallerFonts
+
+\> y distribution (integrated over all values of $x$)
+
+\> focus to reproduce edges -- only visible for pixels (vertically narrow)
+
+\centerline{\fig[16cm]{../plots/\Period/general/y_dist_reco_gun_vs_ref.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Comparison to LHC data}
+
+\SmallerFonts
+
+\> y distribution at bin $x = 10\un{mm}$ (test for vertical position of tilted pixel RPs)
+
+\> focus to reproduce edges -- only visible for pixels (vertically narrow)
+
+\centerline{\fig[16cm]{../plots/\Period/general/y_dist_x_slice_reco_gun_vs_ref.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Comparison to LHC data}
+
+\centerline{\fig[16cm]{../plots/\Period/general/xy_dist_reco_gun_vs_ref.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Comparison to LHC data}
+
+\SmallerFonts
+
+\> top row: simulation + standard reconstruction
+
+\> focus: aperture cut line at very roughly $\xi = 0.13$
+
+\centerline{\fig[12cm]{../plots/\Period/general/aperture_gun_vs_ref.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Direct-simulation validation}{Acceptance}
+
+\> acceptance = fraction $N(\hbox{protons reconstructed}) / N(\hbox{protons simulated})$
+
+\centerline{\fig[16cm]{../plots/\Period/general/acceptance.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\title{Proton-reconstruction tests with simulation}
+
+\> simulation ``levels''
+\>> black: only $y^*$ simulated
+\>> red: $y^*$ and $x^*$ simulated
+\>> blue: $y^*$, $x^*$ and beam divergence simulated
+\>> green: $y^*$, $x^*$, beam divergence and detector resolution simulated
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Single-RP reconstruction}{Bias and resolution, $\xi$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_single_rp/bias_resolution_vs_xi_xi.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Bias and resolution, $\xi$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/bias_resolution_vs_xi_xi.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Bias and resolution, $\th^*_x$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/bias_resolution_vs_xi_th_x.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Bias and resolution, $\th^*_y$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/bias_resolution_vs_xi_th_y.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Bias and resolution, $y^*$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/bias_resolution_vs_xi_vtx_y.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Misalignment impact}
+
+\> considered misalignment scenarios
+\>> black: no misalignment
+\>> red: symmetric misalignment = near and far RP misaligned in the same direction
+\>> blue: anti-symmetric misalignment = near and far RP misaligned in the opposite direction
+
+\> considered separately misalignments in
+\>> horizontal plane ($150\un{\mu m}$ for symmetric, $10\un{\mu m}$ anti-symmetric)
+\>> vertical plane ($100\un{\mu m}$ for symmetric, $10\un{\mu m}$ anti-symmetric)
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Misalignment impact, $\xi$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/misalignment_impact_vs_xi_xi.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Misalignment impact, $\th^*_x$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/misalignment_impact_vs_xi_th_x.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Misalignment impact, $\th^*_y$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/misalignment_impact_vs_xi_th_y.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Misalignment impact, $y^*$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/misalignment_impact_vs_xi_vtx_y.pdf}}
+
+\vfil
+\eject
+\bye

@@ -14,21 +14,21 @@ xSizeDef = 8cm;
 
 //----------------------------------------------------------------------------------------------------
 
-for (int si : sectors.keys)
+for (int ai : arms.keys)
 {
 	NewPad("$\xi$", "acceptance");
-	draw(RootGetObject(f, s_rpId_N[si]+"/h_xi_rat"), "vl", blue, "near");
-	draw(RootGetObject(f, s_rpId_F[si]+"/h_xi_rat"), "vl", heavygreen, "far");
+	draw(RootGetObject(f, a_nr_rps[ai]+"/h_xi_rat"), "vl", blue, "near");
+	draw(RootGetObject(f, a_fr_rps[ai]+"/h_xi_rat"), "vl", heavygreen, "far");
 
-	draw(RootGetObject(f, s_rpId_N[si]+","+s_rpId_F[si]+"/h_xi_rat"), "vl", red+dashed, "near \& far");
+	draw(RootGetObject(f, a_nr_rps[ai]+","+a_fr_rps[ai]+"/h_xi_rat"), "vl", red+dashed, "near \& far");
 
-	AttachLegend(sectors[si]);
+	AttachLegend(a_sectors[ai]);
 }
 
 NewPad("$m\ung{GeV}$", "acceptance");
-draw(RootGetObject(f, s_rpId_N[0]+","+s_rpId_N[1]+"/h_m_rat"), "vl", blue, "near");
-draw(RootGetObject(f, s_rpId_F[0]+","+s_rpId_F[1]+"/h_m_rat"), "vl", heavygreen, "far");
+draw(RootGetObject(f, a_nr_rps[0]+","+a_nr_rps[1]+"/h_m_rat"), "vl", blue, "near");
+draw(RootGetObject(f, a_fr_rps[0]+","+a_fr_rps[1]+"/h_m_rat"), "vl", heavygreen, "far");
 
-draw(RootGetObject(f, s_rpId_N[0]+","+s_rpId_F[0]+","+s_rpId_N[1]+","+s_rpId_F[1]+"/h_m_rat"), "vl", red+dashed, "near \& far");
+draw(RootGetObject(f, a_nr_rps[0]+","+a_fr_rps[0]+","+a_nr_rps[1]+","+a_fr_rps[1]+"/h_m_rat"), "vl", red+dashed, "near \& far");
 
-AttachLegend(sectors[0] + " \& " + sectors[1]);
+AttachLegend(a_sectors[0] + " \& " + a_sectors[1]);

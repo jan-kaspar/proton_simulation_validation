@@ -22,10 +22,10 @@ function RunOne()
 	cp "misalignment_template_cfg.py" "$dir/$cfgFile"
 
 	(
-		echo "process.maxEvents.input = $events"
+		echo "process.maxEvents.input = int($events)"
 
 		cwd=`pwd -P`
-		cwd=${cwd#*src/}
+		cwd=${cwd#*proton_simulation_validation/}
 
 		echo "process.ctppsRPAlignmentCorrectionsDataESSourceXML.MisalignedFiles += cms.vstring(\"$cwd/$aligFile\")"
 		echo "process.ctppsProtonReconstructionSimulationValidator.outputFile = \"misalignment_${tag}_validation.root\""
@@ -55,4 +55,4 @@ function Run()
 
 #----------------------------------------------------------------------------------------------------
 
-Run "$1" "$2"
+Run "$1"

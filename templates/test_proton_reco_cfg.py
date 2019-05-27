@@ -19,26 +19,21 @@ process.MessageLogger = cms.Service("MessageLogger",
 
 # number of events
 process.maxEvents = cms.untracked.PSet(
-  input = cms.untracked.int32(400000)
+  input = cms.untracked.int32(100000)
 )
 
-# acceptance plotter
-process.ctppsAcceptancePlotter = cms.EDAnalyzer("CTPPSAcceptancePlotter",
-  tagHepMC = cms.InputTag("generator", "unsmeared"),
+# reconstruction plotter
+process.ctppsProtonReconstructionPlotter = cms.EDAnalyzer("CTPPSProtonReconstructionPlotter",
   tagTracks = cms.InputTag("ctppsLocalTrackLiteProducer"),
+  tagRecoProtonsSingleRP = cms.InputTag("ctppsProtons", "singleRP"),
+  tagRecoProtonsMultiRP = cms.InputTag("ctppsProtons", "multiRP"),
 
   rpId_45_F = process.rpIds.rp_45_F,
   rpId_45_N = process.rpIds.rp_45_N,
   rpId_56_N = process.rpIds.rp_56_N,
   rpId_56_F = process.rpIds.rp_56_F,
 
-  outputFile = cms.string("test_acceptance.root")
-)
-
-# distribution plotter
-process.ctppsTrackDistributionPlotter = cms.EDAnalyzer("CTPPSTrackDistributionPlotter",
-  tagTracks = cms.InputTag("ctppsLocalTrackLiteProducer"),
-  outputFile = cms.string("test_acceptance_xy.root")
+  outputFile = cms.string("test_proton_reco.root")
 )
 
 # processing path
@@ -49,6 +44,7 @@ process.p = cms.Path(
 
   * process.reco_local
 
-  * process.ctppsAcceptancePlotter
-  * process.ctppsTrackDistributionPlotter
+  * process.ctppsProtons
+
+  * process.ctppsProtonReconstructionPlotter
 )

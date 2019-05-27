@@ -90,12 +90,14 @@ RandomNumberGeneratorService = cms.Service("RandomNumberGeneratorService",
 
 # default source
 source = cms.Source("EmptySource",
-    firstRun = cms.untracked.uint32(1)
+  firstRun = cms.untracked.uint32(1)
 )
 
 # particle generator
 from Validation.CTPPS.randomXiThetaGunProducer_cfi import *
 generator.xi_max = 0.25
+generator.theta_x_sigma = 60E-6
+generator.theta_y_sigma = 60E-6
 
 # beam smearing
 from IOMC.EventVertexGenerators.beamDivergenceVtxGenerator_cfi import *
@@ -112,6 +114,8 @@ ctppsDirectProtonSimulation.pitchPixelsVer = 80E-3
 ctppsDirectProtonSimulation.produceHitsRelativeToBeam = True
 ctppsDirectProtonSimulation.produceScoringPlaneHits = False
 ctppsDirectProtonSimulation.produceRecHits = True
+
+ctppsDirectProtonSimulation.rpsWith2By2Pixels = [3, 103]
 
 # local reconstruction
 from RecoCTPPS.TotemRPLocal.totemRPLocalReconstruction_cff import *

@@ -1,7 +1,9 @@
 import root;
 import pad_layout;
 
-string topDir = "../resolution/1E4/";
+include "../settings.asy";
+
+string topDir = "../../../";
 
 TGraph_errorBar = None;
 
@@ -65,7 +67,7 @@ for (int qi : quantities.keys)
 	
 			for (int li : levels.keys)
 			{
-				string f = topDir + "th_" + thetaSize + "_" + l_tags[li] + "_validation.root";
+				string f = topDir + "results/" + version + "/" + period + "/resolution_th_" + thetaSize + "_" + l_tags[li] + "_validation.root";
 				string o = "multi rp/" + c_tags[ci] + "/" + r_tags[ri] + quantities[qi]+"_vs_t_simu";
 	
 				pen p = l_pens[li];

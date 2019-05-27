@@ -22,10 +22,6 @@ process.maxEvents = cms.untracked.PSet(
   input = cms.untracked.int32(10)
 )
 
-# misalignment
-# TODO: add alignments on top
-#process.load("CalibPPS.ESProducers.ctppsRPAlignmentCorrectionsDataESSourceXML_cfi")
-
 # reconstruction validation
 process.ctppsProtonReconstructionSimulationValidator = cms.EDAnalyzer("CTPPSProtonReconstructionSimulationValidator",
   tagHepMCBeforeSmearing = cms.InputTag("generator", "unsmeared"),

@@ -1,7 +1,9 @@
 import root;
 import pad_layout;
 
-string topDir = "../misalignment/1E4_level_1/";
+include "../settings.asy";
+
+string topDir = "../../../";
 
 TGraph_errorBar = None;
 
@@ -14,8 +16,6 @@ string rows[];
 string r_tags[];
 rows.push("\hbox{horizontal}\hbox{misalignment}"); r_tags.push("x");
 rows.push("\hbox{vertical}\hbox{misalignment}"); r_tags.push("y");
-
-string level = "level4";
 
 string scenarios[], s_tags[];
 pen s_pens[];
@@ -67,7 +67,7 @@ for (int qi : quantities.keys)
 			{
 				string s_tag = replace(s_tags[si], "<proj>", r_tags[ri]);
 
-				string f = topDir + s_tag + "_validation.root";
+				string f = topDir + "results/" + version + "/" + period + "/misalignment_" + s_tag + "_validation.root";
 
 				string o = "multi rp/" + c_tags[ci] + "/p_de_"+quantities[qi]+"_vs_t_simu";
 	

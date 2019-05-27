@@ -1,9 +1,11 @@
 #!/bin/bash
 
-for tag in test_acceptance test_beam_smearing test_proton_gun test_smearing_effects test_xy_pattern
+for tag in test_*
 do
+	tag=${tag%_cfg*}
+
 	cmsRun "${tag}_cfg.py" &> "${tag}.log" &
 done
 
-./resolution_run_multiple "100" "1E4"
-./misalignment_run_multiple "100" "1E4"
+./resolution_run_multiple "1E5"
+./misalignment_run_multiple "1E5"

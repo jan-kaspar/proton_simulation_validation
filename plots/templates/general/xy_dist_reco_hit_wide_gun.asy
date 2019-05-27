@@ -16,7 +16,7 @@ for (int rpi : rps.keys)
 	RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x");
 	hist.vExec("Rebin2D", 2, 2);
 
-	draw(hist);
+	//draw(hist);
 	limits((0, -20), (40, 20), Crop);
 	AttachLegend(rp_labels[rpi]);
 }

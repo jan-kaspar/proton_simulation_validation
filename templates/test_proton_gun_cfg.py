@@ -19,7 +19,7 @@ process.MessageLogger = cms.Service("MessageLogger",
 
 # number of events
 process.maxEvents = cms.untracked.PSet(
-  input = cms.untracked.int32(10000)
+  input = cms.untracked.int32(40000)
 )
 
 # plotter

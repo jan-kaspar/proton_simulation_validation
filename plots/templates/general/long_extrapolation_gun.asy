@@ -6,8 +6,7 @@ string topDir = "../../../";
 
 string dir = "results/" + version + "/" + period;
 
-string f_beam = topDir + dir + "/test_smearing_effects_beam.root";
-string f_sensor = topDir + dir + "/test_smearing_effects_sensor.root";
+string f = topDir + dir + "/test_long_extrapolation.root";
 
 xTicksDef = LeftTicks(20., 10.);
 
@@ -39,14 +38,12 @@ for (int pi : projections.keys)
 
 	for (int rpi : rps.keys)
 	{
-		NewPad("$" + projections[pi] + "_{\rm reco} - " + projections[pi] + "_{\rm simu}\ung{\mu m}$");
+		NewPad("$\De " + projections[pi] + "\ung{\mu m}$");
 
-		//draw(scale(1e3, 1e3), RootGetObject(f_beam, "RP " + rps[rpi] + "/h_de_" + projections[pi]), "vl", blue);
+		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_de_" + projections[pi]);
+		draw(scale(1e3, 1), hist, "vl", red, format("RMS = %.1f", hist.rExec("GetRMS") * 1e3));
 
-		RootObject hist_sensor = RootGetObject(f_sensor, "RP " + rps[rpi] + "/h_de_" + projections[pi]);
-		draw(scale(1e3, 1), hist_sensor, "vl", red, format("RMS = %.1f", hist_sensor.rExec("GetRMS") * 1e3));
-
-		xlimits(-50, +50, Crop);
+		xlimits(-100, +100, Crop);
 
 		AttachLegend();
 	}

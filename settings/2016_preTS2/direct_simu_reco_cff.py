@@ -81,19 +81,21 @@ from SimGeneral.HepPDTESSource.pythiapdt_cfi import *
 
 # random seeds
 RandomNumberGeneratorService = cms.Service("RandomNumberGeneratorService",
-    sourceSeed = cms.PSet(initialSeed =cms.untracked.uint32(98765)),
-    generator = cms.PSet(initialSeed = cms.untracked.uint32(98766)),
-    beamDivergenceVtxGenerator = cms.PSet(initialSeed =cms.untracked.uint32(3849))
+  sourceSeed = cms.PSet(initialSeed =cms.untracked.uint32(98765)),
+  generator = cms.PSet(initialSeed = cms.untracked.uint32(98766)),
+  beamDivergenceVtxGenerator = cms.PSet(initialSeed =cms.untracked.uint32(3849))
 )
 
 # default source
 source = cms.Source("EmptySource",
-    firstRun = cms.untracked.uint32(1)
+  firstRun = cms.untracked.uint32(1)
 )
 
 # particle generator
 from Validation.CTPPS.randomXiThetaGunProducer_cfi import *
 generator.xi_max = 0.25
+generator.theta_x_sigma = 60E-6
+generator.theta_y_sigma = 60E-6
 
 # beam smearing
 from IOMC.EventVertexGenerators.beamDivergenceVtxGenerator_cfi import *
@@ -111,9 +113,12 @@ ctppsDirectProtonSimulation.produceRecHits = True
 
 # local reconstruction
 from RecoCTPPS.TotemRPLocal.totemRPLocalReconstruction_cff import *
+from RecoCTPPS.PixelLocal.ctppsPixelLocalReconstruction_cff import *
 from RecoCTPPS.TotemRPLocal.ctppsLocalTrackLiteProducer_cff import *
 
 totemRPUVPatternFinder.tagRecHit = cms.InputTag('ctppsDirectProtonSimulation')
+
+ctppsPixelLocalTracks.label = "ctppsDirectProtonSimulation"
 
 ctppsLocalTrackLiteProducer.includeDiamonds = False
 ctppsLocalTrackLiteProducer.includePixels = False
