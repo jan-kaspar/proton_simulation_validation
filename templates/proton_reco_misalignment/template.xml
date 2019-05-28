@@ -1,0 +1,6 @@
+<xml DocumentType="AlignmentDescription">
+	<rp id="$rpId_45_N" sh_x="$de_x_N" sh_y="$de_y_N" />
+	<rp id="$rpId_45_F" sh_x="$de_x_F" sh_y="$de_y_F" />
+	<rp id="$rpId_56_N" sh_x="$de_x_N" sh_y="$de_y_N" />
+	<rp id="$rpId_56_F" sh_x="$de_x_F" sh_y="$de_y_F" />
+</xml>

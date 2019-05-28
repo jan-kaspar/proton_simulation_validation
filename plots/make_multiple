@@ -1,18 +1,23 @@
 #!/bin/bash
 
-find $1 -type d|while read d;
+while [ -n "$1" ]
 do
-	echo "* $d"
-
-	rm -rf $d/*.pdf
-
-	cd "$d"
-
-	for f in *.asy
+	find $1 -type d|while read d;
 	do
-		echo "$f"
-		asy "$f" &> /dev/null
+		echo "* $d"
+
+		rm -rf $d/*.pdf
+
+		cd "$d"
+
+		for f in *.asy
+		do
+			echo "$f"
+			asy "$f" &> /dev/null
+		done
+
+		cd - > /dev/null
 	done
 
-	cd - > /dev/null
+	shift
 done

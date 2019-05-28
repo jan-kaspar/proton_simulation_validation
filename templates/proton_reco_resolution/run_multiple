@@ -10,7 +10,7 @@ function RunOne()
 	local cfgFile="resolution_${tag}_cfg.py"
 	local logFile="resolution_${tag}.log"
 
-	cp "resolution_template_cfg.py" "$dir/$cfgFile"
+	cp "template_cfg.py" "$dir/$cfgFile"
 
 	(
 		echo "process.maxEvents.input = int($events)"

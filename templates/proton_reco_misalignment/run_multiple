@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "../settings.sh"
+
 function RunOne()
 {
 	local tag="$1"
@@ -12,14 +14,18 @@ function RunOne()
 	local logFile="misalignment_${tag}.log"
 	local aligFile="misalignment_${tag}.xml"
 
-	cat "misalignment_template.xml" | sed "\
+	cat "template.xml" | sed "\
+			s|\$rpId_45_N|$rpId_45_N|; \
+			s|\$rpId_45_F|$rpId_45_F|; \
+			s|\$rpId_56_N|$rpId_56_N|; \
+			s|\$rpId_56_F|$rpId_56_F|; \
 			s|\$de_x_N|$de_x_N|; \
 			s|\$de_x_F|$de_x_F|; \
 			s|\$de_y_N|$de_y_N|; \
 			s|\$de_y_F|$de_y_F|; \
 		" > "$dir/$aligFile"
 
-	cp "misalignment_template_cfg.py" "$dir/$cfgFile"
+	cp "template_cfg.py" "$dir/$cfgFile"
 
 	(
 		echo "process.maxEvents.input = int($events)"
@@ -27,7 +33,7 @@ function RunOne()
 		cwd=`pwd -P`
 		cwd=${cwd#*proton_simulation_validation/}
 
-		echo "process.ctppsRPAlignmentCorrectionsDataESSourceXML.MisalignedFiles += cms.vstring(\"$cwd/$aligFile\")"
+		echo "process.ctppsRPAlignmentCorrectionsDataESSourceXML.MisalignedFiles += cms.vstring(\"$cwd/$dir/$aligFile\")"
 		echo "process.ctppsProtonReconstructionSimulationValidator.outputFile = \"misalignment_${tag}_validation.root\""
 	) >> "$dir/$cfgFile"
 

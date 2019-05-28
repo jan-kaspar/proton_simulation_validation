@@ -65,7 +65,7 @@ for (int qi : quantities.keys)
 			{
 				string s_tag = replace(s_tags[si], "<proj>", r_tags[ri]);
 
-				string f = topDir + "results/" + version + "/" + period + "/misalignment_" + s_tag + "_validation.root";
+				string f = topDir + "results/" + version + "/" + period + "/proton_reco_misalignment/misalignment_" + s_tag + "_validation.root";
 
 				string o = "multi rp/" + c_tags[ci] + "/p_de_"+quantities[qi]+"_vs_xi_simu";
 	

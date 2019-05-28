@@ -3,6 +3,9 @@ import FWCore.ParameterSet.Config as cms
 from Configuration.Eras.Modifier_ctpps_2016_cff import ctpps_2016
 process = cms.Process('CTPPSProtonReconstructionTest', ctpps_2016)
 
+import sys
+sys.path.append("../")
+
 # load common code
 process.load("direct_simu_reco_cff")
 from customisation_cff import *

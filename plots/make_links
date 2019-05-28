@@ -1,13 +1,13 @@
 #!/bin/bash
 
-for period in "2016_preTS2" "2017_preTS2" "2017_postTS2" "2018"
+for period in "2016_preTS2" "2017_preTS2" "2017_postTS2" "2018" "2018_opt_test"
 do
 	rm -rf "$period"
 
 	mkdir "$period"
 	ln -s "../settings_$period.asy" "$period/settings.asy"
 
-	for dir in "general" "reco_multi_rp" "reco_single_rp"
+	for dir in "general" "efficiency" "reco_multi_rp" "reco_single_rp"
 	do
 		mkdir "$period/$dir"
 

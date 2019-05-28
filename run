@@ -1,10 +1,11 @@
 #!/bin/bash
 
 periods=(
-	"2016_preTS2"
-	"2017_preTS2"
-	"2017_postTS2"
-	"2018"
+	#"2016_preTS2"
+	#"2017_preTS2"
+	#"2017_postTS2"
+	#"2018"
+	#"2018_opt_test"
 )
 
 #----------------------------------------------------------------------------------------------------
@@ -15,12 +16,10 @@ function Run()
 
 	for period in ${periods[*]}
 	do
-		echo "$version/$period"
-
 		dir="results/$version/$period/"
 
 		mkdir -p "$dir"
-		cp templates/* "$dir"
+		cp -R templates/* "$dir"
 		cp settings/$period/* "$dir"
 
 		cd "$dir" || exit
@@ -33,7 +32,7 @@ function Run()
 		rm -f *.root
 		rm -f *.log
 
-		./run_all
+		./run_all "$version/$period" &
 
 		cd - > /dev/null
 	done

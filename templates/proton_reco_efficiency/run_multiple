@@ -1,0 +1,72 @@
+#!/bin/bash
+
+function RunOne()
+{
+	dir="$settings_dir/particles_${n_particles}"
+
+	rm -rf "$dir"
+	mkdir -p "$dir"
+
+	local cfgFile="cfg.py"
+	local logFile="log"
+
+	cp "template_cfg.py" "$dir/$cfgFile"
+
+	(
+		echo "process.maxEvents.input = int($events)"
+		echo "$settings_method"
+		echo "process.generator.nParticlesSector45 = $n_particles"
+		echo "process.generator.nParticlesSector56 = $n_particles"
+	) >> "$dir/$cfgFile"
+
+	cd "$dir"
+
+	cmsRun "$cfgFile" &> "$logFile" &
+
+	cd - &> /dev/null
+}
+
+#----------------------------------------------------------------------------------------------------
+
+function RunOneSettings()
+{
+	settings_dir="$1"
+	settings_method="$2"
+
+	for n_particles in 1 2 3 4 5
+	do
+		RunOne
+	done
+
+	wait
+
+	hadd -f "$settings_dir/merged.root" $settings_dir/particles*/reco_efficiency.root &> /dev/null
+}
+
+#----------------------------------------------------------------------------------------------------
+
+function Run()
+{
+	events="$1"
+
+	RunOneSettings "no_cut" "AssociationNoCut()" &
+
+	#RunOneSettings "xi_0.005" "AssociationXi(0.005)"
+	#RunOneSettings "xi_0.007" "AssociationXi(0.007)"
+	#RunOneSettings "xi_0.010" "AssociationXi(0.010)"
+	RunOneSettings "xi_0.013" "AssociationXi(0.013)" &
+	#RunOneSettings "xi_0.015" "AssociationXi(0.015)"
+
+	#RunOneSettings "xi_0.010_th_y_40" "AssociationXiThy(0.010, 40E-6)"
+	#RunOneSettings "xi_0.010_th_y_50" "AssociationXiThy(0.010, 50E-6)"
+
+	#RunOneSettings "xi_0.013_th_y_10" "AssociationXiThy(0.013, 10E-6)"
+	#RunOneSettings "xi_0.013_th_y_15" "AssociationXiThy(0.013, 15E-6)"
+	RunOneSettings "xi_0.013_th_y_20" "AssociationXiThy(0.013, 20E-6)" &
+	#RunOneSettings "xi_0.013_th_y_30" "AssociationXiThy(0.013, 30E-6)"
+	#RunOneSettings "xi_0.013_th_y_40" "AssociationXiThy(0.013, 40E-6)"
+}
+
+#----------------------------------------------------------------------------------------------------
+
+Run "$1"
