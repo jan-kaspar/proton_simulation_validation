@@ -44,11 +44,5 @@ def UseCrossingAngle(xangle, process):
   process.ctppsBeamParametersESSource.halfXangleX45 = xangle * 1E-6
   process.ctppsBeamParametersESSource.halfXangleX56 = xangle * 1E-6
 
-  process.ctppsDirectProtonSimulation.empiricalAperture45_xi0 = 0.066 + 3.54E-4 * xangle
-  process.ctppsDirectProtonSimulation.empiricalAperture45_a = -( -56 - 0.38 * xangle )
-  process.ctppsDirectProtonSimulation.empiricalAperture56_xi0 = 0.062 + 5.96E-4 * xangle
-  process.ctppsDirectProtonSimulation.empiricalAperture56_a = -( +39 - 1.36 * xangle )
-
-
 def SetDefaults(process):
   UseCrossingAngle(150, process)

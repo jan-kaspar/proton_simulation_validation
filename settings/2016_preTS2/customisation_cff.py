@@ -40,11 +40,7 @@ def SetLargeTheta(process):
 
 # xangle in murad
 def UseCrossingAngle(xangle, process):
-  process.ctppsDirectProtonSimulation.empiricalAperture45_xi0 = 0.111
-  process.ctppsDirectProtonSimulation.empiricalAperture45_a = -( -128 )
-  process.ctppsDirectProtonSimulation.empiricalAperture56_xi0 = 0.138
-  process.ctppsDirectProtonSimulation.empiricalAperture56_a = -( -191 )
-
+  pass
 
 def SetDefaults(process):
   UseCrossingAngle(185, process)

@@ -104,12 +104,21 @@ from IOMC.EventVertexGenerators.beamDivergenceVtxGenerator_cfi import *
 from Validation.CTPPS.ctppsDirectProtonSimulation_cfi import *
 ctppsDirectProtonSimulation.verbosity = 0
 ctppsDirectProtonSimulation.hepMCTag = cms.InputTag('beamDivergenceVtxGenerator')
-ctppsDirectProtonSimulation.useEmpiricalApertures = True
 ctppsDirectProtonSimulation.roundToPitch = True
 ctppsDirectProtonSimulation.pitchStrips = 66E-3 * 12 / 19 # effective value to reproduce real RP resolution
 ctppsDirectProtonSimulation.produceHitsRelativeToBeam = True
 ctppsDirectProtonSimulation.produceScoringPlaneHits = False
 ctppsDirectProtonSimulation.produceRecHits = True
+
+ctppsDirectProtonSimulation.useEmpiricalApertures = True
+ctppsDirectProtonSimulation.empiricalAperture45_xi0_int = 0.111
+ctppsDirectProtonSimulation.empiricalAperture45_xi0_slp = 0.
+ctppsDirectProtonSimulation.empiricalAperture45_a_int = +128
+ctppsDirectProtonSimulation.empiricalAperture45_a_slp = 0.
+ctppsDirectProtonSimulation.empiricalAperture56_xi0_int = 0.138
+ctppsDirectProtonSimulation.empiricalAperture56_xi0_slp = 0.
+ctppsDirectProtonSimulation.empiricalAperture56_a_int = +191
+ctppsDirectProtonSimulation.empiricalAperture56_a_slp = 0.
 
 # local reconstruction
 from RecoCTPPS.TotemRPLocal.totemRPLocalReconstruction_cff import *
