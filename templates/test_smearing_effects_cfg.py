@@ -1,11 +1,9 @@
 import FWCore.ParameterSet.Config as cms
 
-from Configuration.Eras.Modifier_ctpps_2016_cff import ctpps_2016
-process = cms.Process('CTPPSTestAcceptance', ctpps_2016)
-
 # load common code
-process.load("direct_simu_reco_cff")
 from customisation_cff import *
+process = cms.Process('CTPPSTestAcceptance', era)
+process.load("direct_simu_reco_cff")
 SetDefaults(process)
 
 # minimal logger settings

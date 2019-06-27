@@ -1,14 +1,12 @@
 import FWCore.ParameterSet.Config as cms
 
-from Configuration.StandardSequences.Eras import eras
-process = cms.Process('CTPPSProtonReconstructionTest', eras.ctpps_2016)
-
 import sys
 sys.path.append("../../../")
 
 # load common code
-process.load("direct_simu_reco_cff")
 from customisation_cff import *
+process = cms.Process('CTPPSProtonReconstructionTest', era)
+process.load("direct_simu_reco_cff")
 SetDefaults(process)
 
 # minimal logger settings
@@ -30,6 +28,7 @@ process.ctppsProtonReconstructionEfficiencyEstimator = cms.EDAnalyzer("CTPPSProt
   tagHepMCAfterSmearing = cms.InputTag("beamDivergenceVtxGenerator"),
   tagStripRecHitsPerParticle = cms.InputTag('ctppsDirectProtonSimulation'),
   tagPixelRecHitsPerParticle = cms.InputTag('ctppsDirectProtonSimulation'),
+  tagTracks = cms.InputTag('ctppsLocalTrackLiteProducer'),
   tagRecoProtonsMultiRP = cms.InputTag("ctppsProtons", "multiRP"),
 
   lhcInfoLabel = cms.string(""),
