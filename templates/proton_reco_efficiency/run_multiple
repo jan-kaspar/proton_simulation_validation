@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ../settings.sh
+
 function RunOne()
 {
 	dir="$settings_dir/particles_${n_particles}"
@@ -49,22 +51,51 @@ function Run()
 {
 	events="$1"
 
-	RunOneSettings "no_cut" "AssociationNoCut()" &
+	RunOneSettings "no_cut" "AssociationNoCut()"
 
-	#RunOneSettings "xi_0.005" "AssociationXi(0.005)"
-	#RunOneSettings "xi_0.007" "AssociationXi(0.007)"
-	#RunOneSettings "xi_0.010" "AssociationXi(0.010)"
-	RunOneSettings "xi_0.013" "AssociationXi(0.013)" &
-	#RunOneSettings "xi_0.015" "AssociationXi(0.015)"
+	RunOneSettings "default" "" &
 
-	#RunOneSettings "xi_0.010_th_y_40" "AssociationXiThy(0.010, 40E-6)"
-	#RunOneSettings "xi_0.010_th_y_50" "AssociationXiThy(0.010, 50E-6)"
+	if [ "$year" == "2016" ]
+	then
+		RunOneSettings "xi_0.005" "AssociationXi(0.005)"
+		RunOneSettings "xi_0.007" "AssociationXi(0.007)"
+		RunOneSettings "xi_0.010" "AssociationXi(0.010)"
+		RunOneSettings "xi_0.013" "AssociationXi(0.013)"
+		RunOneSettings "xi_0.015" "AssociationXi(0.015)"
 
-	#RunOneSettings "xi_0.013_th_y_10" "AssociationXiThy(0.013, 10E-6)"
-	#RunOneSettings "xi_0.013_th_y_15" "AssociationXiThy(0.013, 15E-6)"
-	RunOneSettings "xi_0.013_th_y_20" "AssociationXiThy(0.013, 20E-6)" &
-	#RunOneSettings "xi_0.013_th_y_30" "AssociationXiThy(0.013, 30E-6)"
-	#RunOneSettings "xi_0.013_th_y_40" "AssociationXiThy(0.013, 40E-6)"
+		#RunOneSettings "xi_0.013_th_y_100" "AssociationXiThy(0.013, 100E-6)"
+		RunOneSettings "xi_0.013_th_y_200" "AssociationXiThy(0.013, 200E-6)"
+		RunOneSettings "xi_0.013_th_y_500" "AssociationXiThy(0.013, 500E-6)"
+	fi
+
+	if [ "$year" == "2017" ]
+	then
+		RunOneSettings "xi_0.010" "AssociationXi(0.010)"
+		RunOneSettings "xi_0.015" "AssociationXi(0.015)"
+		RunOneSettings "xi_0.020" "AssociationXi(0.020)"
+		#RunOneSettings "xi_0.025" "AssociationXi(0.025)"
+		#RunOneSettings "xi_0.030" "AssociationXi(0.030)"
+
+		#RunOneSettings "xi_0.015_th_y_10" "AssociationXiThy(0.015, 10E-6)"
+		RunOneSettings "xi_0.015_th_y_20" "AssociationXiThy(0.015, 20E-6)"
+		RunOneSettings "xi_0.015_th_y_50" "AssociationXiThy(0.015, 50E-6)"
+		RunOneSettings "xi_0.015_th_y_100" "AssociationXiThy(0.015, 100E-6)"
+
+		#RunOneSettings "xi_0.020_th_y_20" "AssociationXiThy(0.020, 20E-6)"
+		#RunOneSettings "xi_0.025_th_y_20" "AssociationXiThy(0.025, 20E-6)"
+		#RunOneSettings "xi_0.030_th_y_20" "AssociationXiThy(0.030, 20E-6)"
+	fi
+
+	if [ "$year" == "2018" ]
+	then
+		RunOneSettings "xi_0.010" "AssociationXi(0.010)"
+		RunOneSettings "xi_0.013" "AssociationXi(0.013)"
+
+		RunOneSettings "xi_0.013_th_y_5" "AssociationXiThy(0.013, 5E-6)"
+		RunOneSettings "xi_0.013_th_y_10" "AssociationXiThy(0.013, 10E-6)"
+		RunOneSettings "xi_0.013_th_y_20" "AssociationXiThy(0.013, 20E-6)"
+		RunOneSettings "xi_0.013_th_y_50" "AssociationXiThy(0.013, 50E-6)"
+	fi
 }
 
 #----------------------------------------------------------------------------------------------------
