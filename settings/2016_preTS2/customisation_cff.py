@@ -1,5 +1,8 @@
 import FWCore.ParameterSet.Config as cms
 
+from Configuration.Eras.Era_Run2_2016_cff import *
+era = Run2_2016
+
 def SetLevel1(process):
   process.ctppsBeamParametersESSource.vtxStddevX = 0E-4
   process.ctppsBeamParametersESSource.vtxStddevZ = 0
