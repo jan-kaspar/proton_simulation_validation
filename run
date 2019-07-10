@@ -1,11 +1,10 @@
 #!/bin/bash
 
 periods=(
-	#"2016_preTS2"
-	#"2017_preTS2"
-	#"2017_postTS2"
+	"2016_preTS2"
+	"2017_preTS2"
+	"2017_postTS2"
 	"2018"
-	#"2018_opt_test"
 )
 
 #----------------------------------------------------------------------------------------------------
@@ -16,7 +15,7 @@ function Run()
 
 	for period in ${periods[*]}
 	do
-		dir="results/$version/$period/"
+		dir="data/$version/$period/"
 
 		mkdir -p "$dir"
 		cp -R templates/* "$dir"
@@ -45,4 +44,6 @@ function Run()
 #Run "version2"
 
 # SW: /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/proton_reco_step4/CMSSW_10_6_1/src at 765fc41562f365c3f9d200724d6aabbfa15d3838
-Run "version3"
+#Run "version3"
+
+Run "version4-test"
