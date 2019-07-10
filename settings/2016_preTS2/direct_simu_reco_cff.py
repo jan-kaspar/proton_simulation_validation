@@ -1,5 +1,8 @@
 import FWCore.ParameterSet.Config as cms
 
+# load defaults
+from RecoCTPPS.ProtonReconstruction.ctppsProtons_cff import *
+
 # beam parameters as declared by LHC
 ctppsLHCInfoESSource = cms.ESSource("CTPPSLHCInfoESSource",
   label = cms.string(""),
@@ -139,7 +142,6 @@ reco_local = cms.Sequence(
 )
 
 # proton reconstruction
-from RecoCTPPS.ProtonReconstruction.ctppsProtons_cff import *
 ctppsProtons.tagLocalTrackLite = cms.InputTag('ctppsLocalTrackLiteProducer')
 
 # RP ids
