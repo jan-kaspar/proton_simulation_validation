@@ -1,7 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
 # load common code
-from customisation_cff import *
+from direct_simu_reco_cff import *
 process = cms.Process('CTPPSTestBeamSmearing', era)
 process.load("direct_simu_reco_cff")
 SetDefaults(process)

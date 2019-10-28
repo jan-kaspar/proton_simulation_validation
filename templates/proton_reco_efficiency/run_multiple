@@ -58,9 +58,9 @@ function Run()
 	if [ "$year" == "2016" ]
 	then
 		RunOneSettings "xi_0.005" "AssociationXi(0.005)"
-		RunOneSettings "xi_0.007" "AssociationXi(0.007)"
+		#RunOneSettings "xi_0.007" "AssociationXi(0.007)"
 		RunOneSettings "xi_0.010" "AssociationXi(0.010)"
-		RunOneSettings "xi_0.013" "AssociationXi(0.013)"
+		#RunOneSettings "xi_0.013" "AssociationXi(0.013)"
 		RunOneSettings "xi_0.015" "AssociationXi(0.015)"
 
 		#RunOneSettings "xi_0.013_th_y_100" "AssociationXiThy(0.013, 100E-6)"
@@ -78,7 +78,7 @@ function Run()
 
 		#RunOneSettings "xi_0.015_th_y_10" "AssociationXiThy(0.015, 10E-6)"
 		RunOneSettings "xi_0.015_th_y_20" "AssociationXiThy(0.015, 20E-6)"
-		RunOneSettings "xi_0.015_th_y_50" "AssociationXiThy(0.015, 50E-6)"
+		#RunOneSettings "xi_0.015_th_y_50" "AssociationXiThy(0.015, 50E-6)"
 		RunOneSettings "xi_0.015_th_y_100" "AssociationXiThy(0.015, 100E-6)"
 
 		#RunOneSettings "xi_0.020_th_y_20" "AssociationXiThy(0.020, 20E-6)"
@@ -91,7 +91,7 @@ function Run()
 		RunOneSettings "xi_0.010" "AssociationXi(0.010)"
 		RunOneSettings "xi_0.013" "AssociationXi(0.013)"
 
-		RunOneSettings "xi_0.013_th_y_5" "AssociationXiThy(0.013, 5E-6)"
+		#RunOneSettings "xi_0.013_th_y_5" "AssociationXiThy(0.013, 5E-6)"
 		RunOneSettings "xi_0.013_th_y_10" "AssociationXiThy(0.013, 10E-6)"
 		RunOneSettings "xi_0.013_th_y_20" "AssociationXiThy(0.013, 20E-6)"
 		RunOneSettings "xi_0.013_th_y_50" "AssociationXiThy(0.013, 50E-6)"
