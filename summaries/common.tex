@@ -28,18 +28,20 @@
 \title{Introduction}
 
 \> unless specified differently, the tests are performed with the following settings
-\>> proton gun
-\>>> $\xi$ distributed uniformly between $0$ and $0.25$
-\>>> $\th^*_{x, y}$: Gaussian distribution with RMS of $60\un{\mu rad}$
+\>> proton gun (details on slide 2)
+\>>> $\xi$ distributed uniformly
+\>>> $\th^*_{x, y}$: Gaussian distribution
 
-\>> beam smearing
-\>>> $x^*$, $y^*$: Gaussian distribution with RMS of $10\un{\mu m}$
-\>>> $z^*$: Gaussian distribution with RMS of $50\un{mm}$
-\>>> beam divergence: Gaussian distribution with RMS of $30\un{\mu rad}$
+\>> beam smearing (details on slide 3)
+\>>> $x^*$, $y^*$: Gaussian distribution
+\>>> $z^*$: Gaussian distribution
+\>>> beam divergence: Gaussian distribution
 
-\>> RP position: tuned horizontally and vertically to reproduce hit distributions in a reference LHC fill (see later)
+\>> RP resolution tuned to value obtained from data (see slide 4)
 
-\>> aperture model: as presented in POG meeting on 21 May 2019
+\>> RP position: tuned horizontally and vertically to reproduce hit distributions in a reference LHC fill (see slides 6 to 8)
+
+\>> aperture model: as presented in \ulink{https://indico.cern.ch/event/849095/contributions/3568020/attachments/1913799/3163250/j_kaspar_apertures.pdf}{GM on 24 Sep 2019}
 
 \>> optics: as currently in CondDB
 
@@ -173,6 +175,9 @@
 \>> blue: $y^*$, $x^*$ and beam divergence simulated
 \>> green: $y^*$, $x^*$, beam divergence and detector resolution simulated
 
+\vfil
+\> no systematics simulated here
+
 
 \newpage %-------------------------------------------------------------------------------------------
 \ctitle{Single-RP reconstruction}{Bias and resolution, $\xi$}
@@ -205,7 +210,7 @@
 
 
 \newpage %-------------------------------------------------------------------------------------------
-\ctitle{Multi-RP reconstruction}{Misalignment impact}
+\title{Misalignment impact}
 
 \> considered misalignment scenarios
 \>> black: no misalignment
@@ -216,6 +221,12 @@
 \>> horizontal plane ($150\un{\mu m}$ for symmetric, $10\un{\mu m}$ anti-symmetric)
 \>> vertical plane ($100\un{\mu m}$ for symmetric, $10\un{\mu m}$ anti-symmetric)
 
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Single-RP reconstruction}{Misalignment impact, $\xi$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_single_rp/misalignment_impact_vs_xi_xi.pdf}}
 
 
 \newpage %-------------------------------------------------------------------------------------------
@@ -242,6 +253,44 @@
 \centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/misalignment_impact_vs_xi_vtx_y.pdf}}
 
 
+
+\newpage %-------------------------------------------------------------------------------------------
+\title{Impact of optics perturbations}
+
+\> considered misalignment scenarios
+\>> TODO
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Single-RP reconstruction}{Optics-perturbation impact, $\xi$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_single_rp/optics_impact_vs_xi_xi.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Optics-perturbation impact, $\xi$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/optics_impact_vs_xi_xi.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Optics-perturbation impact, $\th^*_x$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/optics_impact_vs_xi_th_x.pdf}}
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Multi-RP reconstruction}{Optics-perturbation impact, $\th^*_y$}
+
+\centerline{\fig[16cm]{../plots/\Period/reco_multi_rp/optics_impact_vs_xi_th_y.pdf}}
+
+
+
+\newpage %-------------------------------------------------------------------------------------------
+\title{Near-far association efficiency}
+
+\> TODO: intro
 
 \newpage %-------------------------------------------------------------------------------------------
 \ctitle{Multi-RP reconstruction}{Near-far association efficiency}
