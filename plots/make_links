@@ -1,7 +1,9 @@
 #!/bin/bash
 
-for period in "2016_preTS2" "2017_preTS2" "2017_postTS2" "2018" "2018_opt_test"
+for period in "2016_preTS2" "2016_postTS2" "2017_preTS2" "2017_postTS2" "2018"
 do
+	echo "* $period"
+
 	rm -rf "$period"
 
 	mkdir "$period"
