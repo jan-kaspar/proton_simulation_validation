@@ -65,13 +65,17 @@ for (int qi : quantities.keys)
 			{
 				string s_tag = replace(s_tags[si], "<proj>", r_tags[ri]);
 
-				string f = topDir + "results/" + version + "/" + period + "/proton_reco_misalignment/misalignment_" + s_tag + "_validation.root";
+				string f = topDir + "data/" + version + "/" + period + "/proton_reco_misalignment/misalignment_" + s_tag + "_validation.root";
 
 				string o = "multi rp/" + c_tags[ci] + "/p_de_"+quantities[qi]+"_vs_xi_simu";
 	
 				pen p = s_pens[si];
+
+				RootObject obj = RootGetObject(f, o, error=false);
+				if (!obj.valid)
+					continue;
 	
-				draw(scale(1., q_scales[qi]), RootGetObject(f, o), "d0,eb", p);
+				draw(scale(1., q_scales[qi]), obj, "d0,eb", p);
 			}
 	
 			limits((0., -q_limits[qi]), (0.21, +q_limits[qi]), Crop);

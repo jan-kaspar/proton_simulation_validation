@@ -4,7 +4,7 @@ include "../settings.asy";
 
 string topDir = "../../../";
 
-string f = topDir + "results/" + version + "/" + period + "/test_acceptance_xy.root";
+string f = topDir + "data/" + version + "/" + period + "/test_acceptance_xy.root";
 
 //xTicksDef = LeftTicks(0.5, 0.1);
 
@@ -44,8 +44,11 @@ void DrawOne(string label, real min, real max, bool log=false)
 			TH1_use_y_def = false;
 		}
 
-		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_y");
-		RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_y");
+		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_y", error=false);
+		RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_y", error=false);
+
+		if (!hist.valid || !hist_ref.valid)
+			continue;
 
 		draw(hist, "n,vl", black);
 		draw(hist_ref, "n,vl", red);
@@ -60,6 +63,6 @@ void DrawOne(string label, real min, real max, bool log=false)
 //----------------------------------------------------------------------------------------------------
 
 DrawOne("full range", -15, 15.);
-DrawOne("high y", 1., 8., true);
+DrawOne("high y", 2., 9., true);
 
 GShipout(hSkip=1mm);

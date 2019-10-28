@@ -8,8 +8,8 @@ TGraph_errorBar = None;
 
 string cols[];
 string c_tags[];
-cols.push("sector 45 (220-fr)"); c_tags.push("3");
-cols.push("sector 56 (220-fr)"); c_tags.push("103");
+cols.push("sector 45 (210-fr)"); c_tags.push("3");
+cols.push("sector 56 (210-fr)"); c_tags.push("103");
 
 string rows[];
 string r_tags[], r_labs[];
@@ -66,7 +66,7 @@ for (int qi : quantities.keys)
 	
 			for (int li : levels.keys)
 			{
-				string f = topDir + "results/" + version + "/" + period + "/proton_reco_resolution/resolution_th_" + thetaSize + "_" + l_tags[li] + "_validation.root";
+				string f = topDir + "data/" + version + "/" + period + "/proton_reco_resolution/resolution_th_" + thetaSize + "_" + l_tags[li] + "_validation.root";
 				string o = "single rp/" + c_tags[ci] + "/" + r_tags[ri] + quantities[qi]+"_vs_xi_simu";
 	
 				pen p = l_pens[li];

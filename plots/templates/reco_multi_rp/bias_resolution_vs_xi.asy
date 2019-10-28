@@ -67,15 +67,19 @@ for (int qi : quantities.keys)
 	
 			for (int li : levels.keys)
 			{
-				string f = topDir + "results/" + version + "/" + period + "/proton_reco_resolution/resolution_th_" + thetaSize + "_" + l_tags[li] + "_validation.root";
+				string f = topDir + "data/" + version + "/" + period + "/proton_reco_resolution/resolution_th_" + thetaSize + "_" + l_tags[li] + "_validation.root";
 				string o = "multi rp/" + c_tags[ci] + "/" + r_tags[ri] + quantities[qi]+"_vs_xi_simu";
 	
 				pen p = l_pens[li];
 
+				RootObject obj = RootGetObject(f, o, error=false);
+				if (!obj.valid)
+					continue;
+
 				if (r_labs[ri] == "mean")
-					draw(scale(1., q_scales[qi]), RootGetObject(f, o), "d0,eb", p);
+					draw(scale(1., q_scales[qi]), obj, "d0,eb", p);
 				if (r_labs[ri] == "RMS")
-					draw(scale(1., q_scales[qi]), RootGetObject(f, o), "d0,l,p", p, mCi+2pt+p);
+					draw(scale(1., q_scales[qi]), obj, "d0,l,p", p, mCi+2pt+p);
 			}
 	
 			if (r_labs[ri] == "mean")

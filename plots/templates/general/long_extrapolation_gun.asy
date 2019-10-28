@@ -4,7 +4,7 @@ include "../settings.asy";
 
 string topDir = "../../../";
 
-string dir = "results/" + version + "/" + period;
+string dir = "data/" + version + "/" + period;
 
 string f = topDir + dir + "/test_long_extrapolation.root";
 
@@ -20,8 +20,7 @@ NewPad(false);
 AddToLegend("period: " + replace(period, "_", "\_"));
 AddToLegend("version: " + version);
 
-AddToLegend("simulation", black);
-AddToLegend("LHC data (fill " + ref_data_fill + ")", red);
+AddToLegend("simulation", blue);
 
 AttachLegend();
 
@@ -40,8 +39,12 @@ for (int pi : projections.keys)
 	{
 		NewPad("$\De " + projections[pi] + "\ung{\mu m}$");
 
-		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_de_" + projections[pi]);
-		draw(scale(1e3, 1), hist, "vl", red, format("RMS = %.1f", hist.rExec("GetRMS") * 1e3));
+		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_de_" + projections[pi], error=false);
+
+		if (!hist.valid)
+			continue;
+
+		draw(scale(1e3, 1), hist, "vl", blue, format("RMS = %#.1f", hist.rExec("GetRMS") * 1e3));
 
 		xlimits(-100, +100, Crop);
 

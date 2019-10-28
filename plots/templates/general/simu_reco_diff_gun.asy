@@ -4,7 +4,7 @@ include "../settings.asy";
 
 string topDir = "../../../";
 
-string dir = "results/" + version + "/" + period;
+string dir = "data/" + version + "/" + period;
 
 string f_beam = topDir + dir + "/test_smearing_effects_beam.root";
 string f_sensor = topDir + dir + "/test_smearing_effects_sensor.root";
@@ -43,7 +43,11 @@ for (int pi : projections.keys)
 
 		//draw(scale(1e3, 1e3), RootGetObject(f_beam, "RP " + rps[rpi] + "/h_de_" + projections[pi]), "vl", blue);
 
-		RootObject hist_sensor = RootGetObject(f_sensor, "RP " + rps[rpi] + "/h_de_" + projections[pi]);
+		RootObject hist_sensor = RootGetObject(f_sensor, "RP " + rps[rpi] + "/h_de_" + projections[pi], error=false);
+
+		if (!hist_sensor.valid)
+			continue;
+
 		draw(scale(1e3, 1), hist_sensor, "vl", red, format("RMS = %.1f", hist_sensor.rExec("GetRMS") * 1e3));
 
 		xlimits(-50, +50, Crop);

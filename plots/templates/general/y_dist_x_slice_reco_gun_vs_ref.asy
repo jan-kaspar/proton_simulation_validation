@@ -4,7 +4,7 @@ include "../settings.asy";
 
 string topDir = "../../../";
 
-string f = topDir + "results/" + version + "/" + period + "/test_acceptance_xy.root";
+string f = topDir + "data/" + version + "/" + period + "/test_acceptance_xy.root";
 
 xTicksDef = LeftTicks(5., 1.);
 
@@ -46,13 +46,17 @@ void DrawOne(string label, real min, real max, bool log=false)
 
 		real x = 10.;
 
-		RootObject hist_2D = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x");
+		RootObject hist_2D = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
+		RootObject hist_2D_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
+
+		if (!hist_2D.valid || !hist_2D_ref.valid)
+			continue;
+
 		int bin = hist_2D.oExec("GetXaxis").iExec("FindBin", x);
 		RootObject hist = hist_2D.oExec("ProjectionY", rps[rpi] + "_py", bin, bin);
 
 		draw(hist, "n,vl", black);
 
-		RootObject hist_2D_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h2_y_vs_x");
 		int bin = hist_2D_ref.oExec("GetXaxis").iExec("FindBin", x);
 		RootObject hist_ref = hist_2D_ref.oExec("ProjectionY", rps[rpi] + "_py_ref", bin, bin);
 
@@ -68,6 +72,6 @@ void DrawOne(string label, real min, real max, bool log=false)
 //----------------------------------------------------------------------------------------------------
 
 DrawOne("full range", -15, 15.);
-DrawOne("high y", 3., 7., true);
+DrawOne("high y", 3.5, 7.5, true);
 
 GShipout(hSkip=1mm);

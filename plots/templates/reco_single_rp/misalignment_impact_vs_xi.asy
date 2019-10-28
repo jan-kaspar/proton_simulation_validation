@@ -9,8 +9,8 @@ TGraph_errorBar = None;
 
 string cols[];
 string c_tags[];
-cols.push("sector 45"); c_tags.push("0");
-cols.push("sector 56"); c_tags.push("1");
+cols.push("sector 45 (210-fr)"); c_tags.push("3");
+cols.push("sector 56 (210-fr)"); c_tags.push("103");
 
 string rows[];
 string r_tags[];
@@ -27,15 +27,15 @@ string quantities[];
 string q_labels[];
 string q_units[];
 real q_scales[], q_limits[];
-/*
 quantities.push("xi"); q_labels.push("\xi"); q_units.push(""); q_scales.push(1.); q_limits.push(0.005);
+/*
 quantities.push("th_x"); q_labels.push("\th^*_x"); q_units.push("\ung{\mu rad}"); q_scales.push(1e6); q_limits.push(10);
 quantities.push("th_y"); q_labels.push("\th^*_y"); q_units.push("\ung{\mu rad}"); q_scales.push(1e6); q_limits.push(15);
 quantities.push("vtx_y"); q_labels.push("y^*"); q_units.push("\ung{\mu m}"); q_scales.push(1e3); q_limits.push(200);
-*/
 quantities.push("t"); q_labels.push("|t|"); q_units.push("\ung{GeV^2}"); q_scales.push(1.); q_limits.push(0.5);
+*/
 
-xTicksDef = LeftTicks(1., 0.5);
+xTicksDef = LeftTicks(0.05, 0.01);
 
 //----------------------------------------------------------------------------------------------------
 
@@ -60,7 +60,7 @@ for (int qi : quantities.keys)
 		for (int ci : cols.keys)
 		{
 			string ql = q_labels[qi];
-			NewPad("$|t|(\rm simu)\ung{GeV^2}$", "mean of $"+ql+"({\rm reco}) - "+ql+"({\rm simu}) " + q_units[qi] + "$");
+			NewPad("$\xi(\rm simu)$", "mean of $"+ql+"({\rm reco}) - "+ql+"({\rm simu}) " + q_units[qi] + "$");
 			scale(Linear, Linear(true));
 	
 			for (int si : scenarios.keys)
@@ -69,18 +69,14 @@ for (int qi : quantities.keys)
 
 				string f = topDir + "data/" + version + "/" + period + "/proton_reco_misalignment/misalignment_" + s_tag + "_validation.root";
 
-				string o = "multi rp/" + c_tags[ci] + "/p_de_"+quantities[qi]+"_vs_t_simu";
+				string o = "single rp/" + c_tags[ci] + "/p_de_"+quantities[qi]+"_vs_xi_simu";
 	
 				pen p = s_pens[si];
 	
-				RootObject obj = RootGetObject(f, o, error=false);
-				if (!obj.valid)
-					continue;
-
-				draw(scale(1., q_scales[qi]), obj, "d0,eb", p);
+				draw(scale(1., q_scales[qi]), RootGetObject(f, o), "d0,eb", p);
 			}
 	
-			limits((0., -q_limits[qi]), (5., +q_limits[qi]), Crop);
+			limits((0., -q_limits[qi]), (0.21, +q_limits[qi]), Crop);
 		}
 
 		if (ri == 0)
@@ -96,5 +92,5 @@ for (int qi : quantities.keys)
 		}	
 	}
 
-	GShipout("misalignment_impact_vs_t_" + quantities[qi], vSkip=0mm);
+	GShipout("misalignment_impact_vs_xi_" + quantities[qi], vSkip=0mm);
 }

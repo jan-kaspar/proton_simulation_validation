@@ -4,7 +4,7 @@ include "../settings.asy";
 
 string topDir = "../../../";
 
-string f = topDir + "results/" + version + "/" + period + "/test_proton_reco.root";
+string f = topDir + "data/" + version + "/" + period + "/test_proton_reco.root";
 
 string rows[];
 rows.push("simulation");

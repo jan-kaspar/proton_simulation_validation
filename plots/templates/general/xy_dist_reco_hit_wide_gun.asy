@@ -4,7 +4,7 @@ include "../settings.asy";
 
 string topDir = "../../../";
 
-string f = topDir + "results/" + version + "/" + period + "/test_xy_pattern.root";
+string f = topDir + "data/" + version + "/" + period + "/test_xy_pattern.root";
 
 //----------------------------------------------------------------------------------------------------
 
@@ -13,7 +13,11 @@ for (int rpi : rps.keys)
 	NewPad("$x\ung{mm}$", "$y\ung{mm}$");
 	scale(Linear, Linear, Log);
 
-	RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x");
+	RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
+
+	if (!hist.valid)
+		continue;
+
 	hist.vExec("Rebin2D", 2, 2);
 
 	//draw(hist);

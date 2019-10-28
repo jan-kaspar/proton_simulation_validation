@@ -4,7 +4,7 @@ include "../settings.asy";
 
 string topDir = "../../../";
 
-string dir = "results/" + version + "/" + period;
+string dir = "data/" + version + "/" + period;
 
 string f = topDir + dir + "/test_acceptance.root";
 

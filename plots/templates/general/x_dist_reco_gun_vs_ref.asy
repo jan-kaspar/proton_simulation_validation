@@ -4,7 +4,7 @@ include "../settings.asy";
 
 string topDir = "../../../";
 
-string f = topDir + "results/" + version + "/" + period + "/test_acceptance_xy.root";
+string f = topDir + "data/" + version + "/" + period + "/test_acceptance_xy.root";
 
 xTicksDef = LeftTicks(5., 1.);
 
@@ -42,8 +42,11 @@ void DrawOne(string label, real min, real max, bool log=false)
 			currentpad.xTicks = LeftTicks(0.5, 0.1);
 		}
 
-		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_x");
-		RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_x");
+		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_x", error=false);
+		RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_x", error=false);
+
+		if (!hist.valid || !hist_ref.valid)
+			continue;
 
 		draw(hist, "n,vl", black);
 		draw(hist_ref, "n,vl", red);
