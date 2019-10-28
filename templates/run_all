@@ -2,6 +2,8 @@
 
 echo "* running: $1"
 
+#----------------------------------------------------------------------------------------------------
+
 for tag in test_*
 do
 	tag=${tag%_cfg*}
@@ -9,17 +11,27 @@ do
 	cmsRun "${tag}_cfg.py" &> "${tag}.log" &
 done
 
+#----------------------------------------------------------------------------------------------------
+
+stat="1E5"
+
 cd "proton_reco_resolution"
-./run_multiple "1E5"
+./run_multiple "$stat"
 cd - > /dev/null
 
 cd "proton_reco_misalignment"
-./run_multiple "1E5"
+./run_multiple "$stat"
+cd - > /dev/null
+
+cd "proton_reco_optics"
+./run_multiple "$stat"
 cd - > /dev/null
 
 cd "proton_reco_efficiency"
-./run_multiple "1E5"
+./run_multiple "$stat"
 cd - > /dev/null
+
+#----------------------------------------------------------------------------------------------------
 
 wait
 

@@ -1,0 +1,52 @@
+#!/bin/bash
+
+source "../settings.sh"
+
+function RunOne()
+{
+	local scenario="$1"
+	local factor="$2"
+
+	local tag="${scenario}_${factor}"
+
+	local cfgFile="optics_${tag}_cfg.py"
+	local logFile="optics_${tag}.log"
+	local aligFile="optics_${tag}.xml"
+
+	cat "template_cfg.py" | sed "\
+			s|\$scenario|$scenario|; \
+			s|\$factor|$factor|; \
+		" > "$dir/$cfgFile"
+
+	(
+		echo "process.maxEvents.input = int($events)"
+		echo "process.ctppsProtonReconstructionSimulationValidator.outputFile = \"optics_${tag}_validation.root\""
+		echo "process.ctppsOpticsPlotter_mod.outputFile = \"optics_${tag}_opt_fun.root\""
+	) >> "$dir/$cfgFile"
+
+	cd "$dir"
+
+	cmsRun "$cfgFile" &> "$logFile" &
+
+	cd - &> /dev/null
+}
+
+#----------------------------------------------------------------------------------------------------
+
+function Run()
+{
+	events="$1"
+	dir="."
+
+	RunOne "none" "1"
+
+	RunOne "xd" "1"
+	RunOne "Lx" "1"
+	RunOne "Lpx" "1"
+
+	RunOne "Lx-scale" "2"
+}
+
+#----------------------------------------------------------------------------------------------------
+
+Run "$1"
