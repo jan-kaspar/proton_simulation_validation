@@ -36,6 +36,7 @@ process.ctppsAcceptancePlotter = cms.EDAnalyzer("CTPPSAcceptancePlotter",
 # distribution plotter
 process.ctppsTrackDistributionPlotter = cms.EDAnalyzer("CTPPSTrackDistributionPlotter",
   tagTracks = cms.InputTag("ctppsLocalTrackLiteProducer"),
+  x_pitch_pixels = cms.untracked.double(80E-3), # to be synchronised with process.ctppsDirectProtonSimulation.pitchPixelsVer
   outputFile = cms.string("test_acceptance_xy.root")
 )
 
