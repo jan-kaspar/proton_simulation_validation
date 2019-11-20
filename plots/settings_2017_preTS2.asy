@@ -1,8 +1,8 @@
 string period = "2017_preTS2";
 
-string version = "version5";
+string version = "version6";
 
-string ref_data_dir = "/afs/cern.ch/work/j/jkaspar/work/analyses/ctpps/proton_reconstruction_validation/data/2017/version11/fill_6053/xangle_150_beta_0.40_stream_ALL/";
+string ref_data_dir = "/afs/cern.ch/work/j/jkaspar/work/analyses/ctpps/proton_reconstruction_validation/data/2017/version12/fill_6053/xangle_150_beta_0.40_stream_ALL/";
 string ref_data_file = ref_data_dir + "output_tracks.root";
 string ref_data_fill = "6053";
 
