@@ -1,10 +1,11 @@
 #!/bin/bash
 
 periods=(
-	"2016_preTS2"
-	"2017_preTS2"
-	"2017_postTS2"
-	"2018"
+	#"2016_preTS2"
+	#"2016_postTS2"
+	#"2017_preTS2"
+	#"2017_postTS2"
+	#"2018"
 )
 
 #----------------------------------------------------------------------------------------------------
@@ -26,8 +27,6 @@ function Run()
 		cwd=`pwd -P`
 		cwd=${cwd#*proton_simulation_validation/}
 
-		sed -i "s|\$CWD|$cwd|" direct_simu_reco_cff.py
-
 		rm -f *.root
 		rm -f *.log
 
@@ -46,4 +45,17 @@ function Run()
 # SW: /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/proton_reco_step4/CMSSW_10_6_1/src at 765fc41562f365c3f9d200724d6aabbfa15d3838
 #Run "version3"
 
-Run "version4-test"
+#Run "version4-test"
+
+# CMSSW: at 4938224d8255bcdda59ce09816fa4d6f7510f399
+# this repo: at 251c2741484148fadd97a8c11a2d76a6bfedea6c
+#Run "version5"
+
+# CMSSW: at 1ebb05f3c961cde76c7386effb43b4de5a0ee5b3
+# this repo: at 87beb45e80d58b95afe7e1c4190d3c428351b738
+#Run "version6"
+
+# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_validation_update/CMSSW_11_0_0_pre12
+#   at afad251d1329c5225c10c2f8171049c51f576c7a
+# this repo: at f2d2117a4817cd6306a9fc0d12acbab1f8d5b157
+Run "version7"
