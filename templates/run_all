@@ -1,6 +1,11 @@
 #!/bin/bash
 
-echo "* running: $1"
+version="$1"
+period="$2"
+
+tag="$1/$2"
+
+echo "* running: $tag"
 
 #----------------------------------------------------------------------------------------------------
 
@@ -35,4 +40,7 @@ cd - > /dev/null
 
 wait
 
-echo "* done: $1"
+# cumulative processing
+../../../collect_systematics "$period" &> collect_systematics.log
+
+echo "* done: $tag"
