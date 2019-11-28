@@ -67,6 +67,9 @@ for (int ri : rows.keys)
 	{
 		NewPad(false);
 
+		AddToLegend("<period: " + replace(period, "_", "\_"));
+		AddToLegend("<version: " + version);
+
 		for (int li : levels.keys)
 		{
 			AddToLegend(levels[li], l_pens[li]);

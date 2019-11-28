@@ -57,7 +57,7 @@ for (int ri : rows.keys)
 
 			pen p = l_pens[li];
 
-			draw(RootGetObject(f, o), "d0,eb", p);
+			draw(RootGetObject(f, o), "d0,eb,vl", p);
 		}
 
 		limits((0., -0.025), (0.2, +0.025), Crop);
@@ -66,6 +66,9 @@ for (int ri : rows.keys)
 	if (ri == 0)
 	{
 		NewPad(false);
+
+		AddToLegend("<period: " + replace(period, "_", "\_"));
+		AddToLegend("<version: " + version);
 
 		for (int li : levels.keys)
 		{
