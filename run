@@ -5,7 +5,7 @@ periods=(
 	#"2016_postTS2"
 	#"2017_preTS2"
 	#"2017_postTS2"
-	"2018"
+	#"2018"
 )
 
 #----------------------------------------------------------------------------------------------------
@@ -67,4 +67,9 @@ make || exit 1
 # /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_address_comments/CMSSW_11_1_X_2019-12-12-1100
 #   at TODO
 # this repo: at TODO
-Run "version8"
+#Run "version8"
+
+# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_backport_10_6/CMSSW_10_6_8
+#   at 7f4177b1ff65c5dde48181abdc8f77c31ccea46a
+# this repo: at f3925cb873f37b1f8e6ad6b6ee693a6be0ccb6af
+Run "version9"
