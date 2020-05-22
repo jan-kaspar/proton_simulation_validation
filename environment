@@ -2,10 +2,8 @@
 
 cwd=`pwd`
 
-cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_backport_10_6/CMSSW_10_6_8"
-#cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_address_comments/CMSSW_11_1_X_2019-12-12-1100"
-#cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_validation_update/CMSSW_11_0_0_pre12"
 #cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/proton_reco_step4/CMSSW_10_6_1"
+cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_update/CMSSW_11_1_0_pre7"
 source environment
 
 export CMSSW_SEARCH_PATH="$CMSSW_SEARCH_PATH:$cwd"
