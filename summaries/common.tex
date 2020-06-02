@@ -27,6 +27,7 @@
 \newpage %-------------------------------------------------------------------------------------------
 \title{Introduction}
 
+\iffalse
 \> unless specified differently, the tests are performed with the following settings
 \>> proton gun (details on slide 2)
 \>>> $\xi$ distributed uniformly
@@ -46,7 +47,7 @@
 \>> optics: as currently in CondDB
 
 \>> proton reconstruction: from CMSSW 10\_6\_0
-
+\fi
 
 \newpage %-------------------------------------------------------------------------------------------
 \title{Proton gun validation}
@@ -288,6 +289,23 @@
 
 
 \newpage %-------------------------------------------------------------------------------------------
+\ctitle{Summary for $\xi$ reconstruction}{Bias}
+
+\centerline{\fig[16cm]{../plots/\Period/xi_reco/xi_bias.pdf}}
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Summary for $\xi$ reconstruction}{Resolution}
+
+\centerline{\fig[16cm]{../plots/\Period/xi_reco/xi_resolution.pdf}}
+
+\newpage %-------------------------------------------------------------------------------------------
+\ctitle{Summary for $\xi$ reconstruction}{Systematics}
+
+\centerline{\fig[16cm]{../plots/\Period/xi_reco/xi_systematics.pdf}}
+
+
+\iffalse
+\newpage %-------------------------------------------------------------------------------------------
 \title{Near-far association efficiency}
 
 \> TODO: intro
@@ -296,6 +314,7 @@
 \ctitle{Multi-RP reconstruction}{Near-far association efficiency}
 
 \centerline{\fig[,10cm]{../plots/\Period/efficiency/efficiency.pdf}}
+\fi
 
 
 \vfil
