@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for period in "2016_preTS2" "2016_postTS2" "2017_preTS2" "2017_postTS2" "2018"
+for period in "2016_preTS2" "2016_postTS2" "2017_preTS2" "2017_postTS2" "2018_preTS1" "2018_TS1_TS2" "2018_postTS2" "2021"
 do
 	echo "* $period"
 
