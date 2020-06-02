@@ -8,7 +8,7 @@ cd "$job_dir"
 
 date > "submitted"
 
-export CMSSW_SEARCH_PATH="$CMSSW_SEARCH_PATH:/afs/cern.ch/work/j/jkaspar/work/software/ctpps/cms-data"
+export CMSSW_SEARCH_PATH="$CMSSW_SEARCH_PATH:/afs/cern.ch/work/j/jkaspar/work/software/ctpps/cms-data:$top_dir"
 export CMSSW_DATA_PATH="/afs"
 
 # grid proxy configuration

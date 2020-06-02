@@ -34,7 +34,7 @@ function Run()
 		echo "error = $base_dir_full/\$(dir)/err"
 		echo "log = $base_dir_full/condor_${selection}.log"
 
-		echo "+MaxRuntime = 3600"
+		echo "+MaxRuntime = 2400"
 		#echo "+JobBatchName = \"$job_name\""
 		#echo "requirements = (OpSysAndVer =?= \"SLCern6\")"
 		echo "requirements = (OpSysAndVer =?= \"CentOS7\")"
@@ -49,6 +49,8 @@ function Run()
 		dir="data/$version/$period"
 		full_dir="$(pwd -P)/data/$version/$period"
 
+		top_dir="$(pwd -P)"
+
 		# make and clean directory
 		mkdir -p "$dir"
 		cp -R templates/* "$dir"
@@ -61,6 +63,7 @@ function Run()
 		cat "template_job" | sed "\
 				s|\$sw_dir|$CMSSW_BASE|g;\
 				s|\$job_dir|$full_dir|g;\
+				s|\$top_dir|$top_dir|g;\
 				s|\$version|$version|g;\
 				s|\$period|$period|g;\
 			" > "$dir/job"
@@ -121,5 +124,5 @@ make || exit 1
 version="version10"
 # /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_update/CMSSW_11_1_0_pre7
 #   at 18bdbf1b7ce
-# this repo: at TODO
+# this repo: at 9aebe6e
 Run
