@@ -3,8 +3,6 @@ import pad_layout;
 
 include "../settings.asy";
 
-string topDir = "../../../";
-
 TGraph_errorBar = None;
 
 string cols[];
@@ -73,6 +71,9 @@ for (int qi : quantities.keys)
 	}
 
 	NewPad(false);
+	
+	AddToLegend("<period: " + replace(period, "_", "\_"));
+	AddToLegend("<version: " + version);
 	
 	for (int si : scenarios.keys)
 	{

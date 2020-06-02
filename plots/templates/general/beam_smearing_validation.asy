@@ -2,8 +2,6 @@ import root;
 import pad_layout;
 include "../settings.asy";
 
-string topDir = "../../../";
-
 string dir = "data/" + version + "/" + period;
 
 string f = topDir + dir + "/test_beam_smearing.root";
@@ -50,4 +48,11 @@ for (int si : sectors.keys)
 	RootObject hist = RootGetObject(f, sectors[si] + "/h_de_th_y");
 	draw(scale(1e6, 1), hist, "vl", s_pens[si], format(sectors[si] + ", RMS = %.1f", hist.rExec("GetRMS") * 1e6));
 }
+AttachLegend();
+
+//----------------------------------------------------------------------------------------------------
+
+NewPad(false);
+AddToLegend("<period: " + replace(period, "_", "\_"));
+AddToLegend("<version: " + version);
 AttachLegend();

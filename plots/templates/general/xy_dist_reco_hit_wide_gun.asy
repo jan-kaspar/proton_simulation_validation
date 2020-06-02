@@ -2,8 +2,6 @@ import root;
 import pad_layout;
 include "../settings.asy";
 
-string topDir = "../../../";
-
 string f = topDir + "data/" + version + "/" + period + "/test_xy_pattern.root";
 
 //----------------------------------------------------------------------------------------------------

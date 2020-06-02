@@ -2,8 +2,6 @@ import root;
 import pad_layout;
 include "../settings.asy";
 
-string topDir = "../../../";
-
 string f = topDir + "data/" + version + "/" + period + "/test_acceptance_xy.root";
 
 xTicksDef = LeftTicks(5., 1.);
@@ -15,7 +13,7 @@ AddToLegend("period: " + replace(period, "_", "\_"));
 AddToLegend("version: " + version);
 
 AddToLegend("simulation", black);
-AddToLegend("LHC data (fill " + ref_data_fill + ")", red);
+AddToLegend("LHC data (fill " + ref_data_fill + ")", red+dashed);
 
 AttachLegend();
 
@@ -60,7 +58,7 @@ void DrawOne(string label, real min, real max, bool log=false)
 		int bin = hist_2D_ref.oExec("GetXaxis").iExec("FindBin", x);
 		RootObject hist_ref = hist_2D_ref.oExec("ProjectionY", rps[rpi] + "_py_ref", bin, bin);
 
-		draw(hist_ref, "n,vl", red);
+		draw(hist_ref, "n,vl", red+dashed);
 
 		if (log)
 			limits((min, 4e-4), (max, 1e0), Crop);
@@ -72,6 +70,6 @@ void DrawOne(string label, real min, real max, bool log=false)
 //----------------------------------------------------------------------------------------------------
 
 DrawOne("full range", -15, 15.);
-DrawOne("high y", 3.5, 7.5, true);
+DrawOne("high y", 3.5, 9.0, true);
 
 GShipout(hSkip=1mm);

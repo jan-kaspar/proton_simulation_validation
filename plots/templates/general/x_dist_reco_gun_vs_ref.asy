@@ -2,8 +2,6 @@ import root;
 import pad_layout;
 include "../settings.asy";
 
-string topDir = "../../../";
-
 string f = topDir + "data/" + version + "/" + period + "/test_acceptance_xy.root";
 
 xTicksDef = LeftTicks(5., 1.);
@@ -15,7 +13,7 @@ AddToLegend("period: " + replace(period, "_", "\_"));
 AddToLegend("version: " + version);
 
 AddToLegend("simulation", black);
-AddToLegend("LHC data (fill " + ref_data_fill + ")", red);
+AddToLegend("LHC data (fill " + ref_data_fill + ")", red+dashed);
 
 AttachLegend();
 
@@ -42,14 +40,14 @@ void DrawOne(string label, real min, real max, bool log=false)
 			currentpad.xTicks = LeftTicks(0.5, 0.1);
 		}
 
-		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_x", error=false);
-		RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_x", error=false);
+		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_x", error=true);
+		RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_x", error=true);
 
-		if (!hist.valid || !hist_ref.valid)
+		if (!hist.valid)
 			continue;
 
 		draw(hist, "n,vl", black);
-		draw(hist_ref, "n,vl", red);
+		draw(hist_ref, "n,vl", red+dashed);
 
 		xlimits(min, max, Crop);
 	}

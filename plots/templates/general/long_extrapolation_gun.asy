@@ -2,8 +2,6 @@ import root;
 import pad_layout;
 include "../settings.asy";
 
-string topDir = "../../../";
-
 string dir = "data/" + version + "/" + period;
 
 string f = topDir + dir + "/test_long_extrapolation.root";

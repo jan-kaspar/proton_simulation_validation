@@ -78,6 +78,8 @@ for (int scei : scenarios.keys)
 }
 
 NewPad(false);
+AddToLegend("<period: " + replace(period, "_", "\_"));
+AddToLegend("<version: " + version);
 AddToLegend("<protons in acceptance");
 for (int npi : n_particles.keys)
 	AddToLegend(n_particles[npi], StdPen(npi+1));

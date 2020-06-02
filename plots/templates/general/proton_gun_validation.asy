@@ -2,13 +2,18 @@ import root;
 import pad_layout;
 include "../settings.asy";
 
-string topDir = "../../../";
-
 string dir = "data/" + version + "/" + period;
 
 string f = topDir + dir + "/test_proton_gun.root";
 
 //xTicksDef = LeftTicks(20., 10.);
+
+//----------------------------------------------------------------------------------------------------
+
+NewPad(false);
+AddToLegend("<period: " + replace(period, "_", "\_"));
+AddToLegend("<version: " + version);
+AttachLegend();
 
 //----------------------------------------------------------------------------------------------------
 

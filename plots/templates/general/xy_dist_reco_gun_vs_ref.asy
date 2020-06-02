@@ -2,8 +2,6 @@ import root;
 import pad_layout;
 include "../settings.asy";
 
-string topDir = "../../../";
-
 string f = topDir + "data/" + version + "/" + period + "/test_acceptance_xy.root";
 
 //----------------------------------------------------------------------------------------------------
@@ -34,7 +32,7 @@ for (int rpi : rps.keys)
 	NewPad("$x\ung{mm}$");
 	scale(Linear, Linear, Log);
 
-	RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
+	RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x", error=true);
 
 	if (!hist.valid)
 		continue;

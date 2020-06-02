@@ -2,8 +2,6 @@ import root;
 import pad_layout;
 include "../settings.asy";
 
-string topDir = "../../../";
-
 TGraph_errorBar = None;
 
 string rows[], r_labels[];

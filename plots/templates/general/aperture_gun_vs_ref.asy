@@ -2,8 +2,6 @@ import root;
 import pad_layout;
 include "../settings.asy";
 
-string topDir = "../../../";
-
 string f = topDir + "data/" + version + "/" + period + "/test_proton_reco.root";
 
 string rows[];
@@ -40,7 +38,7 @@ for (int ri : rows.keys)
 		NewPad("$\xi$", "$\th^*_x\ung{\mu rad}$");
 		scale(Linear, Linear, Log);
 
-		string f_in = ref_data_dir + "output.root";
+		string f_in = replace(ref_data_file, "output_tracks.root", "output.root");
 		if (rows[ri] == "simulation")
 			f_in = f;
 
