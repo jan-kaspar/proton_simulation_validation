@@ -104,8 +104,20 @@ int main(int argc, char **argv)
 			TFile *f_in_eff = TFile::Open((dir + sc.simu_eff).c_str());
 			TFile *f_in_none = TFile::Open((dir + sc.simu_none).c_str());
 
+			if (!f_in_eff || !f_in_none)
+			{
+				printf("ERROR: cannot open input files\n");
+				continue;
+			}
+
 			TProfile *p_eff = (TProfile *) f_in_eff->Get((el + "/p_de_xi_vs_xi_simu").c_str());
 			TProfile *p_none = (TProfile *) f_in_none->Get((el + "/p_de_xi_vs_xi_simu").c_str());
+
+			if (!p_eff || !p_none)
+			{
+				printf("ERROR: cannot load input objects\n");
+				continue;
+			}
 
 			gDirectory = d_el;
 
