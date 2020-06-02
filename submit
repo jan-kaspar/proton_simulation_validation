@@ -1,39 +1,83 @@
 #!/bin/bash
 
 periods=(
-	#"2016_preTS2"
-	#"2016_postTS2"
-	#"2017_preTS2"
-	#"2017_postTS2"
-	#"2018"
+	"2016_preTS2"
+	"2016_postTS2"
+
+	"2017_preTS2"
+	"2017_postTS2"
+
+	"2018_preTS1"
+	"2018_TS1_TS2"
+	"2018_postTS2"
+
+	"2021"
 )
 
 #----------------------------------------------------------------------------------------------------
 
 function Run()
 {
-	version="$1"
+	echo "* $version"
 
+	# make version directory
+	mkdir -p "data/$version"
+
+	# initiate submission script
+	condor_file_sub="data/$version/condor.sub"
+
+	(
+		local base_dir_full="$(pwd)"
+		echo "executable = $base_dir_full/\$(dir)/job"
+		echo "arguments = \$(ClusterId) \$(ProcId) \\\"\$(dir)\\\""
+		echo "output = $base_dir_full/\$(dir)/out"
+		echo "error = $base_dir_full/\$(dir)/err"
+		echo "log = $base_dir_full/condor_${selection}.log"
+
+		echo "+MaxRuntime = 3600"
+		#echo "+JobBatchName = \"$job_name\""
+		#echo "requirements = (OpSysAndVer =?= \"SLCern6\")"
+		echo "requirements = (OpSysAndVer =?= \"CentOS7\")"
+
+	) > "$condor_file_sub"
+
+	# submit each period
 	for period in ${periods[*]}
 	do
-		dir="data/$version/$period/"
+		echo " - $period"
 
+		dir="data/$version/$period"
+		full_dir="$(pwd -P)/data/$version/$period"
+
+		# make and clean directory
 		mkdir -p "$dir"
 		cp -R templates/* "$dir"
 		cp settings/$period/* "$dir"
 
-		cd "$dir" || exit
+		rm -f $dir/*.root
+		rm -f $dir/*.log
 
-		cwd=`pwd -P`
-		cwd=${cwd#*proton_simulation_validation/}
+		# make job script
+		cat "template_job" | sed "\
+				s|\$sw_dir|$CMSSW_BASE|g;\
+				s|\$job_dir|$full_dir|g;\
+				s|\$version|$version|g;\
+				s|\$period|$period|g;\
+			" > "$dir/job"
 
-		rm -f *.root
-		rm -f *.log
+		chmod u+x "$dir/job"
 
-		./run_all "$version" "$period" &
-
-		cd - > /dev/null
+		# add submission line
+		(
+			echo ""
+			echo "dir=$dir"
+			echo "queue"
+		) >> "$condor_file_sub"
 	done
+
+	# submit
+	echo "In order to submit do:"
+	echo "    condor_submit \"$condor_file_sub"\"
 }
 
 #----------------------------------------------------------------------------------------------------
@@ -72,4 +116,10 @@ make || exit 1
 # /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_backport_10_6/CMSSW_10_6_8
 #   at 7f4177b1ff65c5dde48181abdc8f77c31ccea46a
 # this repo: at f3925cb873f37b1f8e6ad6b6ee693a6be0ccb6af
-Run "version9"
+#Run "version9"
+
+version="version10"
+# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_update/CMSSW_11_1_0_pre7
+#   at 18bdbf1b7ce
+# this repo: at TODO
+Run
