@@ -1,0 +1,42 @@
+#!/bin/sh
+export HOME="/afs/cern.ch/exp/totem/scratch/jkaspar"
+
+source "/cvmfs/cms.cern.ch/cmsset_default.sh"
+cd "$sw_dir"
+cmsenv
+cd "$job_dir"
+
+date > "submitted"
+
+export CMSSW_SEARCH_PATH="$CMSSW_SEARCH_PATH:/afs/cern.ch/work/j/jkaspar/work/software/ctpps/cms-data"
+export CMSSW_DATA_PATH="/afs"
+
+# grid proxy configuration
+export X509_USER_PROXY="/afs/cern.ch/user/j/jkaspar/x509up_u2177"
+
+echo "--------------------"
+echo "CMSSW version: $CMSSW_VERSION"
+echo "CMSSW installation: $CMSSW_BASE"
+echo "start: `date`"
+echo "--------------------"
+
+./run_all "$version" "$period"
+rc="$?"
+
+success="1"
+
+if [ "$rc" -ne 0 ]
+then
+	success="0"
+	echo "process crashed with return code $rc"
+fi
+
+echo "--------------------"
+echo "end: `date`"
+
+date > "finished"
+
+if [ "$success" == "1" ]
+then
+	date > "success"
+fi
