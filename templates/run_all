@@ -3,9 +3,9 @@
 version="$1"
 period="$2"
 
-tag="$1/$2"
+label="$1/$2"
 
-echo "* running: $tag"
+echo "* running: $label"
 
 #----------------------------------------------------------------------------------------------------
 
@@ -32,9 +32,9 @@ cd "proton_reco_optics"
 ./run_multiple "$stat"
 cd - > /dev/null
 
-cd "proton_reco_efficiency"
-./run_multiple "$stat"
-cd - > /dev/null
+#cd "proton_reco_efficiency"
+#./run_multiple "$stat"
+#cd - > /dev/null
 
 #----------------------------------------------------------------------------------------------------
 
@@ -43,4 +43,4 @@ wait
 # cumulative processing
 ../../../collect_systematics "$period" &> collect_systematics.log
 
-echo "* done: $tag"
+echo "* done: $label"
