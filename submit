@@ -121,8 +121,14 @@ make || exit 1
 # this repo: at f3925cb873f37b1f8e6ad6b6ee693a6be0ccb6af
 #Run "version9"
 
-version="version10"
+#version="version10"
+## /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_update/CMSSW_11_1_0_pre7
+##   at 18bdbf1b7ce
+## this repo: at 9aebe6e
+#Run
+
+version="version11"
 # /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_update/CMSSW_11_1_0_pre7
-#   at 18bdbf1b7ce
-# this repo: at 9aebe6e
+#   at TODO
+# this repo: at TODO
 Run
