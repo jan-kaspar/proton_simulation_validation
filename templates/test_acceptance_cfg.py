@@ -37,6 +37,12 @@ process.ctppsAcceptancePlotter = cms.EDAnalyzer("CTPPSAcceptancePlotter",
 process.ctppsTrackDistributionPlotter = cms.EDAnalyzer("CTPPSTrackDistributionPlotter",
   tagTracks = cms.InputTag("ctppsLocalTrackLiteProducer"),
   x_pitch_pixels = cms.untracked.double(80E-3), # to be synchronised with process.ctppsDirectProtonSimulation.pitchPixelsVer
+
+  rpId_45_F = process.rpIds.rp_45_F,
+  rpId_45_N = process.rpIds.rp_45_N,
+  rpId_56_N = process.rpIds.rp_56_N,
+  rpId_56_F = process.rpIds.rp_56_F,
+
   outputFile = cms.string("test_acceptance_xy.root")
 )
 

@@ -31,7 +31,22 @@ process.ctppsProtonReconstructionPlotter = cms.EDAnalyzer("CTPPSProtonReconstruc
   rpId_56_N = process.rpIds.rp_56_N,
   rpId_56_F = process.rpIds.rp_56_F,
 
+  association_cuts_45 = process.ctppsProtons.association_cuts_45,
+  association_cuts_56 = process.ctppsProtons.association_cuts_56,
+
   outputFile = cms.string("test_proton_reco.root")
+)
+
+# reconstruction validation
+process.ctppsProtonReconstructionSimulationValidator = cms.EDAnalyzer("CTPPSProtonReconstructionSimulationValidator",
+  tagHepMCBeforeSmearing = cms.InputTag("generator", "unsmeared"),
+  tagHepMCAfterSmearing = cms.InputTag("beamDivergenceVtxGenerator"),
+  tagRecoProtonsSingleRP = cms.InputTag("ctppsProtons", "singleRP"),
+  tagRecoProtonsMultiRP = cms.InputTag("ctppsProtons", "multiRP"),
+
+  lhcInfoLabel = cms.string(""),
+
+  outputFile = cms.string("test_proton_reco_val.root")
 )
 
 # processing path
@@ -45,4 +60,5 @@ process.p = cms.Path(
   * process.ctppsProtons
 
   * process.ctppsProtonReconstructionPlotter
+  * process.ctppsProtonReconstructionSimulationValidator
 )

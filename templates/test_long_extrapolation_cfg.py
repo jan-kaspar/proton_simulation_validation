@@ -40,6 +40,8 @@ process.ctppsInterpolatedOpticalFunctionsESSourceTEST = process.ctppsInterpolate
 # alternative simulation
 process.ctppsDirectProtonSimulationTEST = process.ctppsDirectProtonSimulation.clone( opticsLabel="TEST" )
 
+process.RandomNumberGeneratorService.ctppsDirectProtonSimulationTEST = process.RandomNumberGeneratorService.ctppsDirectProtonSimulation.clone()
+
 # alternative reconstruction
 process.totemRPUVPatternFinderTEST = process.totemRPUVPatternFinder.clone( tagRecHit = cms.InputTag('ctppsDirectProtonSimulationTEST') )
 process.totemRPLocalTrackFitterTEST = process.totemRPLocalTrackFitter.clone( tagUVPattern = cms.InputTag("totemRPUVPatternFinderTEST") )

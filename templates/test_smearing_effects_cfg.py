@@ -29,6 +29,8 @@ process.ctppsDirectProtonSimulationNoSm = process.ctppsDirectProtonSimulation.cl
   produceRecHits = False,
 )
 
+process.RandomNumberGeneratorService.ctppsDirectProtonSimulationNoSm = process.RandomNumberGeneratorService.ctppsDirectProtonSimulation.clone()
+
 # plotters
 process.ctppsDirectProtonSimulationValidatorBeamSm = cms.EDAnalyzer("CTPPSDirectProtonSimulationValidator",
   simuTracksTag = cms.InputTag("ctppsDirectProtonSimulationNoSm"),

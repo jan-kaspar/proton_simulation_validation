@@ -27,6 +27,12 @@ process.maxEvents = cms.untracked.PSet(
 # distribution plotter
 process.ctppsTrackDistributionPlotter = cms.EDAnalyzer("CTPPSTrackDistributionPlotter",
   tagTracks = cms.InputTag("ctppsLocalTrackLiteProducer"),
+
+  rpId_45_F = process.rpIds.rp_45_F,
+  rpId_45_N = process.rpIds.rp_45_N,
+  rpId_56_N = process.rpIds.rp_56_N,
+  rpId_56_F = process.rpIds.rp_56_F,
+
   outputFile = cms.string("test_xy_pattern.root")
 )
 
