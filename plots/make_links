@@ -9,7 +9,7 @@ do
 	mkdir "$period"
 	ln -s "../settings_$period.asy" "$period/settings.asy"
 
-	for dir in "general" "efficiency" "reco_multi_rp" "reco_single_rp" "xi_reco"
+	for dir in "general" "efficiency" "reco_multi_rp" "reco_single_rp" "timing" "xi_reco"
 	do
 		mkdir "$period/$dir"
 

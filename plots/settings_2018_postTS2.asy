@@ -2,7 +2,7 @@ string topDir = "/afs/cern.ch/work/j/jkaspar/work/analyses/ctpps/proton_simulati
 
 string period = "2018_postTS2";
 
-string version = "version10";
+string version = "version11";
 
 string ref_data_fill = "7315";
 string ref_data_dir = "/afs/cern.ch/work/j/jkaspar/work/analyses/ctpps/proton_reconstruction_validation/data/2018/version-UL-devel-11";

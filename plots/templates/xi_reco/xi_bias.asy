@@ -51,11 +51,13 @@ for (int ri : rows.keys)
 			if (rows[ri] == "single rp") bd = rows[ri] + "/" + c_rps[ci];
 			if (rows[ri] == "multi rp") bd = rows[ri] + "/" + cols[ci];
 
-			string o = bd + "/p_de_xi_vs_xi_simu";
+			RootObject o = RootGetObject(f, bd + "/p_de_xi_vs_xi_simu", error=false);
+			if (!o.valid)
+				continue;
 
 			pen p = l_pens[li];
 
-			draw(RootGetObject(f, o), "d0,eb,vl", p);
+			draw(o, "d0,eb,vl", p);
 		}
 
 		limits((0., -0.025), (0.2, +0.025), Crop);

@@ -44,10 +44,11 @@ void DrawOne(string label, real min, real max, bool log=false)
 
 		real x = 10.;
 
-		RootObject hist_2D = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
-		RootObject hist_2D_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
+		bool draw_ref = (ref_data_fill != "NONE");
 
-		if (!hist_2D.valid || !hist_2D_ref.valid)
+		RootObject hist_2D = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
+
+		if (!hist_2D.valid)
 			continue;
 
 		int bin = hist_2D.oExec("GetXaxis").iExec("FindBin", x);
@@ -55,10 +56,18 @@ void DrawOne(string label, real min, real max, bool log=false)
 
 		draw(hist, "n,vl", black);
 
-		int bin = hist_2D_ref.oExec("GetXaxis").iExec("FindBin", x);
-		RootObject hist_ref = hist_2D_ref.oExec("ProjectionY", rps[rpi] + "_py_ref", bin, bin);
+		if (draw_ref)
+		{
+			RootObject hist_2D_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
 
-		draw(hist_ref, "n,vl", red+dashed);
+			if (hist_2D_ref.valid)
+			{
+				int bin = hist_2D_ref.oExec("GetXaxis").iExec("FindBin", x);
+				RootObject hist_ref = hist_2D_ref.oExec("ProjectionY", rps[rpi] + "_py_ref", bin, bin);
+
+				draw(hist_ref, "n,vl", red+dashed);
+			}
+		}
 
 		if (log)
 			limits((min, 4e-4), (max, 1e0), Crop);

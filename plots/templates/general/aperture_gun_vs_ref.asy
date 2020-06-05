@@ -30,6 +30,9 @@ TH2_y_max = +300e-6;
 for (int ri : rows.keys)
 {
 	NewRow();
+	
+	if (rows[ri] != "simulation" && ref_data_fill == "NONE")
+		continue;
 
 	NewPadLabel(rows[ri]);
 

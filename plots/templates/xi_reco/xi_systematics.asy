@@ -45,13 +45,16 @@ for (int ri : rows.keys)
 
 		for (int ci : contributions.keys)
 		{
-			RootObject obj = RootGetObject(f, element + "/" + contributions[ci]);
+			RootObject obj = RootGetObject(f, element + "/" + contributions[ci], error=false);
+			if (!obj.valid)
+				continue;
 			pen p = StdPen(ci+1);
 			draw(obj, "l,p,ds0", p, mCi+1pt+p);
 		}
 
-		RootObject obj = RootGetObject(f, element + "/combined");
-		draw(obj, "l,p,ds0", black+1pt, mCi+1pt);
+		RootObject obj = RootGetObject(f, element + "/combined", error=false);
+		if (obj.valid)
+			draw(obj, "l,p,ds0", black+1pt, mCi+1pt);
 
 		limits((0, -0.025), (0.2, +0.025), Crop);
 	}

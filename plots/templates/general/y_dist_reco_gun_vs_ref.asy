@@ -42,14 +42,21 @@ void DrawOne(string label, real min, real max, bool log=false)
 			TH1_use_y_def = false;
 		}
 
+		bool draw_ref = (ref_data_fill != "NONE");
+
 		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_y", error=false);
-		RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_y", error=false);
 
-		if (!hist.valid || !hist_ref.valid)
+		if (!hist.valid)
 			continue;
-
+		
 		draw(hist, "n,vl", black);
-		draw(hist_ref, "n,vl", red+dashed);
+
+		if (draw_ref)
+		{
+			RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_y", error=false);
+			if (hist_ref.valid)
+				draw(hist_ref, "n,vl", red+dashed);
+		}
 
 		if (log)
 			limits((min, 4e-5), (max, 1e0), Crop);

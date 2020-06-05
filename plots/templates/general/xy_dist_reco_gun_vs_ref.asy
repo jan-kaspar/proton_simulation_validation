@@ -29,10 +29,10 @@ NewPadLabel("simulation");
 
 for (int rpi : rps.keys)
 {
-	NewPad("$x\ung{mm}$");
+	NewPad("$x\ung{mm}$", "$y\ung{mm}$");
 	scale(Linear, Linear, Log);
 
-	RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x", error=true);
+	RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
 
 	if (!hist.valid)
 		continue;
@@ -45,26 +45,31 @@ for (int rpi : rps.keys)
 	limits((0, -15), (30, +15), Crop);
 }
 
-NewRow();
+bool draw_ref = (ref_data_fill != "NONE");
 
-NewPadLabel("LHC data (fill " + ref_data_fill + ")");
-
-for (int rpi : rps.keys)
+if (draw_ref)
 {
-	NewPad("$x\ung{mm}$");
-	scale(Linear, Linear, Log);
+	NewRow();
 
-	RootObject hist = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
+	NewPadLabel("LHC data (fill " + ref_data_fill + ")");
 
-	if (!hist.valid)
-		continue;
+	for (int rpi : rps.keys)
+	{
+		NewPad("$x\ung{mm}$");
+		scale(Linear, Linear, Log);
 
-	if (rebin)
-		hist.vExec("Rebin2D", 2, 2);
+		RootObject hist = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h2_y_vs_x", error=false);
 
-	draw(hist);
+		if (!hist.valid)
+			continue;
 
-	limits((0, -15), (30, +15), Crop);
+		if (rebin)
+			hist.vExec("Rebin2D", 2, 2);
+
+		draw(hist);
+
+		limits((0, -15), (30, +15), Crop);
+	}
 }
 
 GShipout(hSkip=1mm);

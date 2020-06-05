@@ -17,17 +17,22 @@ sectors.push("sector 56"); s_pens.push(blue);
 
 NewPad("$\De x^*\ung{\mu m}$");
 RootObject hist = RootGetObject(f, "h_de_vtx_x");
-draw(scale(1e3, 1), hist, "vl", red, format("RMS = %.1f", hist.rExec("GetRMS") * 1e3));
+draw(scale(1e3, 1), hist, "vl", red, format("RMS = %#.1f", hist.rExec("GetRMS") * 1e3));
 AttachLegend();
 
 NewPad("$\De y^*\ung{\mu m}$");
 RootObject hist = RootGetObject(f, "h_de_vtx_y");
-draw(scale(1e3, 1), hist, "vl", red, format("RMS = %.1f", hist.rExec("GetRMS") * 1e3));
+draw(scale(1e3, 1), hist, "vl", red, format("RMS = %#.1f", hist.rExec("GetRMS") * 1e3));
 AttachLegend();
 
 NewPad("$\De z^*\ung{mm}$");
 RootObject hist = RootGetObject(f, "h_de_vtx_z");
-draw(scale(1, 1), hist, "vl", red, format("RMS = %.1f", hist.rExec("GetRMS") * 1));
+draw(scale(1, 1), hist, "vl", red, format("RMS = %#.1f", hist.rExec("GetRMS") * 1));
+AttachLegend();
+
+NewPad("$\De t^*\ung{mm}$");
+RootObject hist = RootGetObject(f, "h_de_vtx_t");
+draw(scale(1, 1), hist, "vl", red, format("RMS = %#.1f", hist.rExec("GetRMS") * 1));
 AttachLegend();
 
 //----------------------------------------------------------------------------------------------------

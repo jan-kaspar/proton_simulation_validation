@@ -40,14 +40,21 @@ void DrawOne(string label, real min, real max, bool log=false)
 			currentpad.xTicks = LeftTicks(0.5, 0.1);
 		}
 
-		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_x", error=true);
-		RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_x", error=true);
+		bool draw_ref = (ref_data_fill != "NONE");
+
+		RootObject hist = RootGetObject(f, "RP " + rps[rpi] + "/h_x", error=false);
 
 		if (!hist.valid)
 			continue;
 
 		draw(hist, "n,vl", black);
-		draw(hist_ref, "n,vl", red+dashed);
+
+		if (draw_ref)
+		{
+			RootObject hist_ref = RootGetObject(ref_data_file, "RP " + rps[rpi] + "/h_x", error=false);
+			if (hist_ref.valid)
+				draw(hist_ref, "n,vl", red+dashed);
+		}
 
 		xlimits(min, max, Crop);
 	}
