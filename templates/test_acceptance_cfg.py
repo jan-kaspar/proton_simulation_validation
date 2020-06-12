@@ -1,10 +1,10 @@
 import FWCore.ParameterSet.Config as cms
 
 # load common code
-from direct_simu_reco_cff import *
-process = cms.Process('CTPPSTestAcceptance', era)
-process.load("direct_simu_reco_cff")
-SetDefaults(process)
+import direct_simu_reco_cff as profile
+process = cms.Process('CTPPSTestAcceptance', profile.era)
+profile.LoadConfig(process)
+profile.config.SetDefaults(process)
 
 # minimal logger settings
 process.MessageLogger = cms.Service("MessageLogger",

@@ -14,8 +14,8 @@ function RunOne()
 
 	(
 		echo "process.maxEvents.input = int($events)"
-		echo "Set${thSize}Theta(process)"
-		echo "SetLevel${level}(process)"
+		echo "profile.config.Set${thSize}Theta(process)"
+		echo "profile.config.SetLevel${level}(process)"
 		echo "process.ctppsProtonReconstructionSimulationValidator.outputFile = \"resolution_${tag}_validation.root\""
 	) >> "$dir/$cfgFile"
 

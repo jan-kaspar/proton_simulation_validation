@@ -4,16 +4,16 @@ import sys
 sys.path.append("../")
 
 # load common code
-from direct_simu_reco_cff import *
-process = cms.Process('CTPPSProtonReconstructionTest', era)
-process.load("direct_simu_reco_cff")
-SetDefaults(process)
+import direct_simu_reco_cff as profile
+process = cms.Process('CTPPSProtonReconstructionTest', profile.era)
+profile.LoadConfig(process)
+profile.config.SetDefaults(process)
 
 # minimal logger settings
 process.MessageLogger = cms.Service("MessageLogger",
   statistics = cms.untracked.vstring(),
-  destinations = cms.untracked.vstring('cerr'),
-  cerr = cms.untracked.PSet(
+  destinations = cms.untracked.vstring('cout'),
+  cout = cms.untracked.PSet(
     threshold = cms.untracked.string('WARNING')
   )
 )
@@ -45,6 +45,12 @@ process.ctppsModifiedOpticalFunctionsESSource = cms.ESProducer("CTPPSModifiedOpt
 
 process.ctppsOpticsPlotter_mod = cms.EDAnalyzer("CTPPSOpticsPlotter",
   opticsLabel = cms.string("modified"),
+
+  rpId_45_F = process.rpIds.rp_45_F,
+  rpId_45_N = process.rpIds.rp_45_N,
+  rpId_56_N = process.rpIds.rp_56_N,
+  rpId_56_F = process.rpIds.rp_56_F,
+
   outputFile = cms.string("optics_modified.root")
 )
 
@@ -81,6 +87,6 @@ process.p = cms.Path(
 
 #----------
 
-SetLargeTheta(process)
-SetLevel4(process)
+profile.config.SetLargeTheta(process)
+profile.config.SetLevel4(process)
 

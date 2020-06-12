@@ -4,16 +4,16 @@ import sys
 sys.path.append("../")
 
 # load common code
-from direct_simu_reco_cff import *
-process = cms.Process('CTPPSProtonReconstructionTest', era)
-process.load("direct_simu_reco_cff")
-SetDefaults(process)
+import direct_simu_reco_cff as profile
+process = cms.Process('CTPPSProtonReconstructionTest', profile.era)
+profile.LoadConfig(process)
+profile.config.SetDefaults(process)
 
 # minimal logger settings
 process.MessageLogger = cms.Service("MessageLogger",
   statistics = cms.untracked.vstring(),
-  destinations = cms.untracked.vstring('cerr'),
-  cerr = cms.untracked.PSet(
+  destinations = cms.untracked.vstring('cout'),
+  cout = cms.untracked.PSet(
     threshold = cms.untracked.string('WARNING')
   )
 )
