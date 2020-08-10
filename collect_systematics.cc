@@ -54,9 +54,22 @@ TGraphErrors* MakeCombination(const vector<TGraphErrors *> &vp)
 
 //----------------------------------------------------------------------------------------------------
 
+void PrintUsage()
+{
+	printf("USAGE: collect_systematics <period>\n");
+}
+
+//----------------------------------------------------------------------------------------------------
+
 int main(int argc, char **argv)
 {
 	// parse command line
+	if (argc != 2)
+	{
+		PrintUsage();
+		return 1;
+	}
+
 	string period = argv[1];
 
 	// config
@@ -78,8 +91,12 @@ int main(int argc, char **argv)
 	};
 
 	vector<string> elements = {
+		"single rp/2",
 		"single rp/3",
+		"single rp/23",
+		"single rp/102",
 		"single rp/103",
+		"single rp/123",
 		"multi rp/0",
 		"multi rp/1",
 	};
@@ -115,7 +132,7 @@ int main(int argc, char **argv)
 
 			if (!p_eff || !p_none)
 			{
-				printf("ERROR: cannot load input objects\n");
+				printf("ERROR: cannot load input objects (scenario %s)\n", sc.name.c_str());
 				continue;
 			}
 
@@ -127,8 +144,11 @@ int main(int argc, char **argv)
 			graphs.push_back(g_diff);
 		}
 
-		TGraphErrors *g_comb = MakeCombination(graphs);
-		g_comb->Write("combined");
+		if (!graphs.empty())
+		{
+			TGraphErrors *g_comb = MakeCombination(graphs);
+			g_comb->Write("combined");
+		}
 	}
 
 	// clean up
