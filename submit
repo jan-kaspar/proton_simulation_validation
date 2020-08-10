@@ -11,7 +11,7 @@ periods=(
 	"2018_TS1_TS2"
 	"2018_postTS2"
 
-	"2021"
+	#"2021"
 )
 
 #----------------------------------------------------------------------------------------------------
@@ -127,8 +127,20 @@ make || exit 1
 ## this repo: at 9aebe6e
 #Run
 
-version="version11"
-# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_update/CMSSW_11_1_0_pre7
+#version="version11"
+## /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_update/CMSSW_11_1_0_pre7
+##   at TODO
+## this repo: at TODO
+#Run
+
+#version="version12"
+## /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_A_11_1/CMSSW_11_1_0_pre8
+##   at 83c4850caeb
+## this repo: at TODO
+#Run
+
+version="version13"
+# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_systematics/CMSSW_11_2_0_pre3
 #   at TODO
 # this repo: at TODO
 Run
