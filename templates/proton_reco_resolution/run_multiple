@@ -17,6 +17,7 @@ function RunOne()
 		echo "profile.config.Set${thSize}Theta(process)"
 		echo "profile.config.SetLevel${level}(process)"
 		echo "process.ctppsProtonReconstructionSimulationValidator.outputFile = \"resolution_${tag}_validation.root\""
+		echo "process.ctppsLHCInfoPlotter.outputFile = \"resolution_${tag}_lhcInfo.root\""
 	) >> "$dir/$cfgFile"
 
 	cd "$dir"
