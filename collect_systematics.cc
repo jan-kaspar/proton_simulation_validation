@@ -1,6 +1,8 @@
 #include "TFile.h"
 #include "TProfile.h"
 #include "TGraphErrors.h"
+#include "TGraph2D.h"
+#include "TMatrixD.h"
 
 #include <string>
 
@@ -50,6 +52,56 @@ TGraphErrors* MakeCombination(const vector<TGraphErrors *> &vp)
 	}
 
 	return g;
+}
+
+//----------------------------------------------------------------------------------------------------
+
+TGraph2D* MakeCorrelation(const vector<TGraphErrors *> &vp)
+{
+	TGraph *g_ref = vp[0];
+
+	int dim = g_ref->GetN();
+
+	TMatrixD V(dim, dim);
+	for (const auto c : vp)
+	{
+		for (int i = 0; i < dim; ++i)
+		{
+			for (int j = 0; j < dim; ++j)
+			{
+				const double ci = c->GetY()[i];
+				const double cj = c->GetY()[j];
+
+				V(i, j) += ci * cj;
+			}
+		}
+	}
+
+	TMatrixD C(dim, dim);
+	for (int i = 0; i < dim; ++i)
+	{
+		for (int j = 0; j < dim; ++j)
+		{
+			const double denom = V(i, i) * V(j, j);
+			C(i, j) = (denom > 0.) ? V(i, j) / sqrt(denom) : 0.;
+		}
+	}
+
+	TGraph2D *g2_corr = new TGraph2D();
+	g2_corr->SetTitle(";#xi;#xi");
+	for (int i = 0; i < dim; ++i)
+	{
+		for (int j = 0; j < dim; ++j)
+		{
+			const double xi = g_ref->GetX()[i];
+			const double xj = g_ref->GetX()[j];
+
+			const int idx = g2_corr->GetN();
+			g2_corr->SetPoint(idx, xi, xj, C(i, j));
+		}
+	}
+
+	return g2_corr;
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -148,6 +200,8 @@ int main(int argc, char **argv)
 		{
 			TGraphErrors *g_comb = MakeCombination(graphs);
 			g_comb->Write("combined");
+
+			MakeCorrelation(graphs)->Write("g2_correlation");
 		}
 	}
 
