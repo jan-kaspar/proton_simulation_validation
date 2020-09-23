@@ -2,11 +2,11 @@ string topDir = "/afs/cern.ch/work/j/jkaspar/work/analyses/ctpps/proton_simulati
 
 string period = "2018_postTS2";
 
-string version = "version11";
+string version = "version12";
 
 string ref_data_fill = "7315";
-string ref_data_dir = "/afs/cern.ch/work/j/jkaspar/work/analyses/ctpps/proton_reconstruction_validation/data/2018/version-UL-devel-11";
-string ref_data_file = ref_data_dir + "/fill_" + ref_data_fill + "/xangle_150_beta_0.30_stream_ALL/output_tracks.root";
+string ref_data_dir = "/afs/cern.ch/work/j/jkaspar/work/analyses/ctpps/proton_reconstruction_validation/data/2018/version-simu-cmp-1";
+string ref_data_file = ref_data_dir + "/fill_" + ref_data_fill + "/xangle_140_beta_0.30_stream_ALL/output_tracks.root";
 
 string rps[], rp_labels[];
 rps.push("23"); rp_labels.push("45-220-fr");
