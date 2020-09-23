@@ -18,7 +18,8 @@ done
 
 #----------------------------------------------------------------------------------------------------
 
-stat="4E5"
+# TODO to 4E5
+stat="4E6"
 
 cd "proton_reco_resolution"
 ./run_multiple "$stat"
@@ -32,6 +33,7 @@ cd "proton_reco_optics"
 ./run_multiple "$stat"
 cd - > /dev/null
 
+# this shall stay commented out
 #cd "proton_reco_efficiency"
 #./run_multiple "$stat"
 #cd - > /dev/null
