@@ -2,7 +2,7 @@
 
 cwd=`pwd`
 
-cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_systematics/CMSSW_11_2_0_pre3"
+cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_systematics_rebased/CMSSW_11_2_0_pre5"
 source environment
 
 export CMSSW_SEARCH_PATH="$CMSSW_SEARCH_PATH:$cwd"
