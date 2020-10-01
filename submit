@@ -34,7 +34,7 @@ function Run()
 		echo "error = $base_dir_full/\$(dir)/err"
 		echo "log = $base_dir_full/condor_${selection}.log"
 
-		echo "+MaxRuntime = 14400"
+		echo "+MaxRuntime = 36000"
 		#echo "+JobBatchName = \"$job_name\""
 		#echo "requirements = (OpSysAndVer =?= \"SLCern6\")"
 		echo "requirements = (OpSysAndVer =?= \"CentOS7\")"
@@ -151,3 +151,15 @@ version="version14"
 #   at b5898038603
 # this repo: at 6e043b1
 #Run
+
+version="version16"
+# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_sector_fixes/CMSSW_11_2_0_pre6
+#   at cc2adc08f08
+# this repo: at eb43a25
+#Run
+
+version="version17"
+# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_xangle_beta_distributions/CMSSW_11_2_0_pre6
+#   at cfaecf66a82
+# this repo: at 
+Run
