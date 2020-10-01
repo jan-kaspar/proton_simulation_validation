@@ -8,7 +8,6 @@ import direct_simu_reco_cff as profile
 process = cms.Process('CTPPSProtonReconstructionTest', profile.era)
 profile.LoadConfig(process)
 profile.config.SetDefaults(process)
-profile.config.UseCrossingAngleDistribution(process, "../../../../xangle_distributions/xangle_distributions.root")
 
 # minimal logger settings
 process.MessageLogger = cms.Service("MessageLogger",
