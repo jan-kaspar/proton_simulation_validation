@@ -23,6 +23,41 @@ function Run()
 	# make version directory
 	mkdir -p "data/$version"
 
+	# make info file
+	(
+		echo "DATE:"
+		date
+
+		cd $CMSSW_BASE/src
+
+		echo ""
+		echo "--------------------------------------------------"
+
+		echo ""
+		echo "CMSSW base: $CMSSW_BASE"
+
+		echo ""
+		echo "CMSSW history:"
+		git log --oneline|head -n 3
+
+		echo ""
+		echo "CMSSW status:"
+		git st
+
+		echo ""
+		echo "--------------------------------------------------"
+
+		cd - &> /dev/null
+
+		echo ""
+		echo "This repo at:"
+		git log --oneline|head -n 3
+
+		echo ""
+		echo "This repo history:"
+		git st
+	) > "data/$version/info"
+
 	# initiate submission script
 	condor_file_sub="data/$version/condor.sub"
 
@@ -85,81 +120,22 @@ function Run()
 
 #----------------------------------------------------------------------------------------------------
 
-make || exit 1
+function PrintUsage()
+{
+	echo "USAGE: $0 <version>"
+}
 
 #----------------------------------------------------------------------------------------------------
 
-#Run "version1"
+make || exit 1
 
-#Run "version2"
+version="$1"
 
-# SW: /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/proton_reco_step4/CMSSW_10_6_1/src at 765fc41562f365c3f9d200724d6aabbfa15d3838
-#Run "version3"
+if [ -z "$version" ]
+then
+	echo "ERROR: version not given"
+	PrintUsage
+	exit 1
+fi
 
-#Run "version4-test"
-
-# CMSSW: at 4938224d8255bcdda59ce09816fa4d6f7510f399
-# this repo: at 251c2741484148fadd97a8c11a2d76a6bfedea6c
-#Run "version5"
-
-# CMSSW: at 1ebb05f3c961cde76c7386effb43b4de5a0ee5b3
-# this repo: at 87beb45e80d58b95afe7e1c4190d3c428351b738
-#Run "version6"
-
-# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_validation_update/CMSSW_11_0_0_pre12
-#   at afad251d1329c5225c10c2f8171049c51f576c7a
-# this repo: at f2d2117a4817cd6306a9fc0d12acbab1f8d5b157
-#Run "version7"
-
-# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_address_comments/CMSSW_11_1_X_2019-12-12-1100
-#   at TODO
-# this repo: at TODO
-#Run "version8"
-
-# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_backport_10_6/CMSSW_10_6_8
-#   at 7f4177b1ff65c5dde48181abdc8f77c31ccea46a
-# this repo: at f3925cb873f37b1f8e6ad6b6ee693a6be0ccb6af
-#Run "version9"
-
-#version="version10"
-## /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_update/CMSSW_11_1_0_pre7
-##   at 18bdbf1b7ce
-## this repo: at 9aebe6e
-#Run
-
-#version="version11"
-## /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_update/CMSSW_11_1_0_pre7
-##   at TODO
-## this repo: at TODO
-#Run
-
-#version="version12"
-## /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_direct_simu_A_11_1/CMSSW_11_1_0_pre8
-##   at 83c4850caeb
-## this repo: at TODO
-#Run
-
-version="version13"
-# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_systematics/CMSSW_11_2_0_pre3
-#   at b5898038603
-# this repo: at 6e043b1
-#   UseCrossingAngleDistribution command commented out
-#Run
-
-version="version14"
-# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_systematics/CMSSW_11_2_0_pre3
-#   at b5898038603
-# this repo: at 6e043b1
-#Run
-
-version="version16"
-# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_sector_fixes/CMSSW_11_2_0_pre6
-#   at cc2adc08f08
-# this repo: at eb43a25
-#Run
-
-version="version17"
-# /afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/pps_xangle_beta_distributions/CMSSW_11_2_0_pre6
-#   at cfaecf66a82
-# this repo: at 
 Run
