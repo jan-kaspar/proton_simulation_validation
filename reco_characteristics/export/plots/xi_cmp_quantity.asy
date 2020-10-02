@@ -1,6 +1,8 @@
 import root;
 import pad_layout;
 
+string topDir = "../";
+
 string periods[] = {
 	"2016_preTS2",
 	"2016_postTS2",
@@ -32,8 +34,7 @@ quantities.push("bias"); q_pens.push(red);
 quantities.push("resolution"); q_pens.push(blue);
 quantities.push("systematics"); q_pens.push(heavygreen);
 
-string version = "v17"; 
-string file = "../reco_charactersitics_v17.root";
+string f = "reco_charactersitics_v17-long.root";
 
 TGraph_errorBar = None;
 
@@ -41,7 +42,7 @@ TGraph_errorBar = None;
 
 NewPad(false);
 
-AddToLegend("<version: " + version);
+AddToLegend("<file: " + replace(f, "_", "\_"));
 for (int qi : quantities.keys)
 {
 	AddToLegend(quantities[qi], q_pens[qi]);
@@ -63,7 +64,7 @@ for (int pei : periods.keys)
 
 		for (int qi : quantities.keys)
 		{
-			RootObject g = RootGetObject(file, periods[pei] + "/" + elements[eli] + "/xi/g_" + quantities[qi] + "_vs_xi", error=false);
+			RootObject g = RootGetObject(topDir + f, periods[pei] + "/" + elements[eli] + "/xi/g_" + quantities[qi] + "_vs_xi", error=false);
 			if (g.valid)
 				draw(g, "l,p", q_pens[qi]);
 		}

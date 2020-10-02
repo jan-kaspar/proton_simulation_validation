@@ -33,8 +33,8 @@ unique_ptr<TGraphErrors> ProfileToGraph(const TProfile *p)
 
 int main()
 {
-	string topDir = "../../data/version17/";
-	string output = "reco_charactersitics_v17.root";
+	string topDir = "../../data/version17-long/";
+	string output = "reco_charactersitics_v17-long.root";
 
 	vector<string> periods = {
 		"2016_preTS2",
