@@ -31,10 +31,26 @@ unique_ptr<TGraphErrors> ProfileToGraph(const TProfile *p)
 
 //----------------------------------------------------------------------------------------------------
 
+template <typename T>
+void ZeroOutsideRange(T &g, double xi_min, double xi_max)
+{
+	for (int i = 0; i < g->GetN(); ++i)
+	{
+		const auto &xi = g->GetX()[i];
+		if (xi < xi_min || xi > xi_max)
+		{
+			g->GetY()[i] = 0.;
+			g->SetPointError(i, 0., 0.);
+		}
+	}
+}
+
+//----------------------------------------------------------------------------------------------------
+
 int main()
 {
-	string topDir = "../../data/version17-long/";
-	string output = "reco_charactersitics_v17-long.root";
+	string topDir = "../../data/version17-1E6/";
+	string output = "reco_charactersitics_v17-1E6.root";
 
 	vector<string> periods = {
 		"2016_preTS2",
@@ -94,7 +110,7 @@ int main()
 
 				// get input
 				TProfile *p_bias = (TProfile *) f_in_bias_resolution->Get((element + "/p_de_xi_vs_xi_simu").c_str());
-				TGraph *g_resolution = (TGraph *) f_in_bias_resolution->Get((element + "/g_rms_de_xi_vs_xi_simu").c_str());
+				TGraphErrors *g_resolution = (TGraphErrors *) f_in_bias_resolution->Get((element + "/g_rms_de_xi_vs_xi_simu").c_str());
 				TGraphErrors *g_systematics = (TGraphErrors *) f_in_systematics->Get((element_dash + "/combined").c_str());
 
 				if (!p_bias || !g_resolution || !g_systematics)
@@ -103,20 +119,36 @@ int main()
 					continue;
 				}
 
+				// determine range
+				double xi_min = 1E100, xi_max = -1E100;
+				for (int bi = 1; bi < p_bias->GetNbinsX(); ++bi)
+				{
+					const double c = p_bias->GetBinCenter(bi);
+					const double w = p_bias->GetBinWidth(bi);
+					const double e = p_bias->GetBinEntries(bi);
+
+					if (e > 10)
+					{
+						xi_min = min(xi_min, c-w/4.);
+						xi_max = max(xi_max, c+w/4.);
+					}
+				}
+
 				// bias and uncertainty
 				auto g_bias = ProfileToGraph(p_bias);
+				ZeroOutsideRange(g_bias, xi_min, xi_max);
 				g_bias->SetTitle(";xi;bias");
 				g_bias->Write("g_bias_vs_xi");
 
+				ZeroOutsideRange(g_resolution, xi_min, xi_max);
 				g_resolution->SetTitle(";#xi simu;resolution");
 				g_resolution->Write("g_resolution_vs_xi");
 
 				// systematics
+				ZeroOutsideRange(g_systematics, xi_min, xi_max);
 				g_systematics->SetTitle(";#xi simu;systematics");
 				g_systematics->Write("g_systematics_vs_xi");
 			}
-
-
 		}
 	}
 
