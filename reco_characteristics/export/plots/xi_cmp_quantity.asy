@@ -34,7 +34,7 @@ quantities.push("bias"); q_pens.push(red);
 quantities.push("resolution"); q_pens.push(blue);
 quantities.push("systematics"); q_pens.push(heavygreen);
 
-string f = "reco_charactersitics_v17-long.root";
+string f = "reco_charactersitics_v17-1E6.root";
 
 TGraph_errorBar = None;
 
