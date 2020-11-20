@@ -33,7 +33,8 @@ function RunOne()
 		cwd=`pwd -P`
 		cwd=${cwd#*proton_simulation_validation/}
 
-		echo "process.ctppsRPAlignmentCorrectionsDataESSourceXML.MisalignedFiles += cms.vstring(\"$cwd/$dir/$aligFile\")"
+		echo "for p in process.ctppsCompositeESSource.periods:"
+		echo "  p.ctppsRPAlignmentCorrectionsDataXML.MisalignedFiles += cms.vstring(\"$cwd/$dir/$aligFile\")"
 		echo "process.ctppsProtonReconstructionSimulationValidator.outputFile = \"misalignment_${tag}_validation.root\""
 	) >> "$dir/$cfgFile"
 

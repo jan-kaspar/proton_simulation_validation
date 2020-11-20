@@ -4,7 +4,6 @@ import FWCore.ParameterSet.Config as cms
 import direct_simu_reco_cff as profile
 process = cms.Process('CTPPSTestLongExtrapolation', profile.era)
 profile.LoadConfig(process)
-profile.config.SetDefaults(process)
 
 # minimal logger settings
 process.MessageLogger = cms.Service("MessageLogger",
