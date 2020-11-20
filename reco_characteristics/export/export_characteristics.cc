@@ -49,8 +49,8 @@ void ZeroOutsideRange(T &g, double xi_min, double xi_max)
 
 int main()
 {
-	string topDir = "../../data/version17-1E6/";
-	string output = "reco_charactersitics_v17-1E6.root";
+	string topDir = "../../data/version18/";
+	string output = "reco_charactersitics_v18.root";
 
 	vector<string> periods = {
 		"2016_preTS2",

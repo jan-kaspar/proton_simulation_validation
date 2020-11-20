@@ -34,7 +34,8 @@ string characteristics[] = {
 
 string versions[], v_files[];
 pen v_pens[];
-versions.push("v14"); v_files.push("../reco_charactersitics_v14.root"); v_pens.push(red);
+versions.push("v17-1E6"); v_files.push("../reco_charactersitics_v17-1E6.root"); v_pens.push(blue);
+versions.push("v18"); v_files.push("../reco_charactersitics_v18.root"); v_pens.push(red+dashed);
 
 TGraph_errorBar = None;
 
