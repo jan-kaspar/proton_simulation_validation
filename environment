@@ -2,7 +2,7 @@
 
 cwd=`pwd`
 
-cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/development/dirsim_dynamic_conditions/CMSSW_11_2_0_pre8"
+cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/production/CMSSW_11_3_0_pre2"
 source environment
 
 export CMSSW_SEARCH_PATH="$CMSSW_SEARCH_PATH:$cwd"
