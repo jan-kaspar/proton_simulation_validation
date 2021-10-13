@@ -1,0 +1,15 @@
+#!/bin/bash
+
+make || exit 1
+
+for dir in data/version18/20*
+do
+    period=${dir##*/}
+
+    echo "* $dir"
+    cd "$dir"
+
+    ../../../collect_systematics "$period" &> collect_systematics.log
+
+    cd - &> /dev/null
+done
