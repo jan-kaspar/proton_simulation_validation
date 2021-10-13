@@ -1,6 +1,6 @@
 string topDir = "/afs/cern.ch/work/j/jkaspar/work/analyses/ctpps/proton_simulation_validation/";
 
-string period = "2021";
+string period = "2022";
 
 string version = "version19";
 
