@@ -14,7 +14,7 @@ Besides others, the standard plots include those quantifying the uncertainties r
  * Initialise the environment: `bash --rcfile environment`.
  * Optionally: edit `submit` file and (un)comment the PPS eras for which you wish to run tests.
  * Produce execution scripts: `./submit <my_version>`, where `<my_version>` stands for an output directory name.
- * If you wish to execute the on CERN's HTCondor, use the command printed on screen. If you wish to run (some of) them locally, use the `run_multiple` script - edit the file to select the version and the list of PPS eras. The local execution proceeds in background can take several minutes.
+ * If you wish to execute them on CERN's HTCondor, use the command printed on screen. If you wish to run (some of) them locally, use the `run_multiple` script - edit the file to select the version and the list of PPS eras. The local execution proceeds in background can take several minutes.
  * The results can be found in `data/<my_version>` directory.
 
 
