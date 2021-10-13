@@ -1,0 +1,28 @@
+#!/bin/bash
+
+version="my_version"
+
+periods=(
+	#"2016_preTS2"
+	#"2016_postTS2"
+
+	#"2017_preTS2"
+	#"2017_postTS2"
+
+	"2018_preTS1"
+	#"2018_TS1_TS2"
+	#"2018_postTS2"
+
+	#"2021"
+)
+
+#----------------------------------------------------------------------------------------------------
+
+for period in ${periods[*]}
+do
+	dir="data/$version/$period"
+
+	echo "* $dir"
+
+	$dir/job > $dir/out 2> $dir/err &
+done
