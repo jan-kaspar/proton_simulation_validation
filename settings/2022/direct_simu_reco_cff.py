@@ -5,4 +5,4 @@ def LoadConfig(process):
   global config
   import Validation.CTPPS.simu_config.year_2022_cff as config
   process.load("Validation.CTPPS.simu_config.year_2022_cff")
-  process.ctppsCompositeESSource.periods = [config.profile_2022]
+  process.ctppsCompositeESSource.periods = [config.profile_2022_default]
