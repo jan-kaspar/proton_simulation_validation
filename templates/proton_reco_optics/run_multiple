@@ -38,6 +38,9 @@ function Run()
 	events="$1"
 	dir="."
 
+	# meaning of parameters, from left to right:
+	#  - scenario label
+	#  - factor or number of sigmas
 	RunOne "none" "1"
 
 	RunOne "xd" "1"

@@ -53,6 +53,12 @@ function Run()
 	events="$1"
 	dir="."
 
+	# meaning of parameters, from left to right:
+	#  - scenario label
+	#  - horizontal displacement of the near RP
+	#  - horizontal displacement of the far RP
+	#  - vertical displacement of the near RP
+	#  - vertical displacement of the far RP
 	RunOne "none" "0" "0" "0" "0"
 	RunOne "x_sym" "+150" "+150" "0" "0"
 	RunOne "x_asym" "-10" "+10" "0" "0"
