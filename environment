@@ -10,7 +10,7 @@ then
 else
 	source /cvmfs/cms.cern.ch/cmsset_default.sh
 	cd src
-	cmsenv
+	eval `scramv1 runtime -sh`
 fi
 
 export CMSSW_SEARCH_PATH="$CMSSW_SEARCH_PATH:$cwd"
