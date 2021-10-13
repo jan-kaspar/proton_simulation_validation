@@ -2,23 +2,18 @@
 
 cwd=`pwd`
 
-cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/production/CMSSW_11_3_0_pre2"
-source environment
+cd "/afs/cern.ch/work/j/jkaspar/work/software/ctpps/production/CMSSW_12_1_0_pre3"
+
+if [ -f "environment" ]
+then
+	source environment
+else
+	source /cvmfs/cms.cern.ch/cmsset_default.sh
+	cd src
+	cmsenv
+fi
 
 export CMSSW_SEARCH_PATH="$CMSSW_SEARCH_PATH:$cwd"
-
-compName=$(uname -n)
-export compName="${compName%%.*}"
-
-function CalculatePrompt()
-{
-	cwd=`pwd`
-	cwd=${cwd/\/afs\/cern.ch\/work\/j\/jkaspar/...}
-	cwd=${cwd/\/analyses\/ctpps/}
-}
-
-PROMPT_COMMAND="CalculatePrompt"
-export PS1="\[\033[00;34m\]${compName} \[\033[00;33m\]${CMSSW_VERSION}\[\033[00;32m\] \$cwd> \[\033[00m\]"
 
 cd "$cwd"
 
