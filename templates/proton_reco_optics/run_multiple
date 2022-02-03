@@ -46,8 +46,9 @@ function Run()
 	RunOne "xd" "1"
 	RunOne "Lx" "1"
 	RunOne "Lpx" "1"
+	RunOne "Lpy" "1"
 
-	RunOne "Lx-scale" "2"
+	#RunOne "Lx-scale" "2"
 }
 
 #----------------------------------------------------------------------------------------------------
