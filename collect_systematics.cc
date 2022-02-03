@@ -136,9 +136,12 @@ int main(int argc, char **argv)
 	vector<Scenario> scenarios = {
 		{ "alig-x-sym", "proton_reco_misalignment/misalignment_x_sym_validation.root", "proton_reco_misalignment/misalignment_none_validation.root" },
 		{ "alig-x-asym", "proton_reco_misalignment/misalignment_x_asym_validation.root", "proton_reco_misalignment/misalignment_none_validation.root" },
+		{ "alig-y-sym", "proton_reco_misalignment/misalignment_y_sym_validation.root", "proton_reco_misalignment/misalignment_none_validation.root" },
+                { "alig-y-asym", "proton_reco_misalignment/misalignment_y_asym_validation.root", "proton_reco_misalignment/misalignment_none_validation.root" },
 
 		{ "opt-Lx", "proton_reco_optics/optics_Lx_1_validation.root", "proton_reco_optics/optics_none_1_validation.root" },
 		{ "opt-Lpx", "proton_reco_optics/optics_Lpx_1_validation.root", "proton_reco_optics/optics_none_1_validation.root" },
+		{ "opt-Lpy", "proton_reco_optics/optics_Lpy_1_validation.root", "proton_reco_optics/optics_none_1_validation.root" },
 		{ "opt-xd", "proton_reco_optics/optics_xd_1_validation.root", "proton_reco_optics/optics_none_1_validation.root" },
 	};
 
